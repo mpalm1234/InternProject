@@ -69,6 +69,9 @@
             else if (acronym == 'E R P'){
                 say = 'E R P stands for Enterprise Resource Planning';
             }
+            else if (acronym == 'E R T'){
+                say = 'E R T stands for Energy Resource Transmission';
+            }
             else if (acronym == 'F O'){
                 say = 'F O stands for Front Office';
             }

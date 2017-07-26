@@ -1,0 +1,19 @@
+{
+  "intents": [
+    {
+      "intent": "WhatIsNuclear"
+    },
+    {
+      "intent": "SalemSpecs"
+    },
+    {
+      "intent": "SalemAge"
+    },
+    {
+      "intent": "HopeCreekSpecs"
+    },
+    {
+      "intent": "HopeCreekAge"
+    }
+  ]
+}

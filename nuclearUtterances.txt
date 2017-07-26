@@ -1,0 +1,37 @@
+WhatIsNuclear Tell me about P S E G's nuclear power plant
+WhatIsNuclear What power plants does P S E G own
+WhatIsNuclear What power plants does P S E G operate
+WhatIsNuclear How many power plants does P S E G own
+WhatIsNuclear How many power plants does P S E G operate
+WhatIsNuclear Where is P S E G's power plant
+WhatIsNuclear Where is P S E G's power plant located
+WhatIsNuclear Where are P S E G's power plants
+WhatIsNuclear Where are P S E G's power plants located
+SalemSpecs Tell me about the Salem nuclear generating station
+SalemSpecs Tell me about Salem
+SalemSpecs What is the Salem nucelar generating station able to do
+SalemSpecs What is Salem able to do
+SalemSpecs What does the Salem nuclear generating station do
+SalemSpecs What does Salem do
+SalemAge How old is the Salem nuclear generating station
+SalemAge How old is Salem
+SalemAge How long has the Salem nuclear generating station been operating
+SalemAge How long has Salem been operating
+SalemAge When was the Salem nuclear generating station built
+SalemAge When was Salem built
+SalemAge When did the Salem nuclear generating station begin service
+SalemAge When did Salem begin service
+HopeCreekSpecs Tell me about the Hope Creek nuclear generating station
+HopeCreekSpecs Tell me about Hope Creek
+HopeCreekSpecs What is the Hope Creek nucelar generating station able to do
+HopeCreekSpecs What is Hope Creek able to do
+HopeCreekSpecs What does the Hope Creek nuclear generating station do
+HopeCreekSpecs What does Hope Creek do
+HopeCreekAge How old is the Hope Creek nuclear generating station
+HopeCreekAge How old is Hope Creek
+HopeCreekAge How long has the Hope Creek nuclear generating station been operating
+HopeCreekAge How long has Hope Creek been operating
+HopeCreekAge When was the Hope Creek nuclear generating station built
+HopeCreekAge When was Hope Creek built
+HopeCreekAge When did the Hope Creek nuclear generating station begin service
+HopeCreekAge When did Hope Creek begin service

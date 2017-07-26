@@ -1,0 +1,13 @@
+{
+  "intents": [
+    {
+      "slots": [
+        {
+          "name": "AcronymName",
+          "type": "ACRONYM"
+        }
+      ],
+      "intent": "acronymHelper"
+    }
+  ]
+}

@@ -1,65 +1,66 @@
-A D R
-A P O
-A R D
-A R T
-A S D
-A S O
-B I
-B P
-B P M
-B R
-B V A
-B V S
-C B T
-C I
-C I S O
-C M D B
-C S R
-D C R
-D D I
-E M R
-E R
-E R P
-E R T
-F O
-F R
-F R R B
-F T E
-I M
-I R D
-I S O
-I V R
-L O B
-M M
-N F R
-O G C
-O L
-P A
-P C I
-P C R
-P I I
-P I R
-P O
-P O C
-P P Q A
-P S I
-P S R
-P T
-R C A
-R I C E F W
-R N C
-R O M
-R P A
-S L A
-S L O
-S L T
-S M E
-S N
-S R M
-T A R
-T D D
-U A T
-U P O
-W B S
-W M
-X I
+a. d. r.
+a. p. o.
+a. r. d.
+a. r. t.
+a. s. d
+a. s. o.
+b. i.
+b. p.
+b. p. m.
+b. r. 
+b. v. a.
+b. v. s. 
+c. b. t.
+c. i.
+c. i. s. o.
+c. m. d. b.
+c. s. r.
+d. c. r.
+d. d. i.
+e. m. r.
+e. r.
+e. r. p.
+e. r. t.
+f. o.
+f. r.
+f. r. r. b.
+f. t. e.
+i. m.
+i. r. d.
+i. s. o.
+i. v. r.
+l. o. b.
+m. m.
+n. f. r.
+o. g. c.
+o. l.
+p. a.
+p. c. i.
+p. c. r.
+p. i. i.
+p. i. r.
+p. o.
+p. o. c.
+p. p. q. a.
+p. s. i.
+p. s. r.
+p. t.
+r. c. a.
+r. i. c. e. f. w.
+r. n. c.
+r. o. m.
+r. p. a.
+s. l. a.
+s. l. o.
+s. l. t.
+s. m. e.
+s. n.
+s. o. w.
+s. r. m.
+t. a. r.
+t. d. d.
+u. a. t.
+u. p. o.
+w. b. s.
+w. m.
+x. i.

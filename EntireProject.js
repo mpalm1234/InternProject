@@ -1,18 +1,87 @@
-/* This is the lambda function for the project, last updated 7/28 */
-
 'use strict';
 
 var Alexa = require('alexa-sdk');
 var https = require('https');
-var myRequest = "";
+var myRequest = '';
+const APP_ID = 'amzn1.ask.skill.1e041c80-9217-4ddb-b923-295e425d4ea8';
+var HELP_MESSAGE = 'Ask me anythig you would like to know about P S E G.';
+var STOP_MESSAGE = 'Goodbye. ';
+var unknown = 'I did not understand that.';
 
-exports.handler = function (event, context, callback) {
-    const alexa = Alexa.handler(event, context);
-    alexa.resources = languageStrings;
-    alexa.registerHandlers(handlers);
-    alexa.execute();
-};
+// HELP QUESTIONS VARS:
+var anyIssue = 'The help desk is open 24/7. ';
+var voiceIssue = 'The help desk is open for voice and Phone issues Monday through Friday 7 to 5. ';
+var SoftwareIssue = 'The help desk is open for Premium Software issues Monday through Friday 8:30 to 5. ';
+var number = 'The help desk phone number is: 1 877 430 7500. ';
+var CONTINUE= 'If you want to continue I can tell you hours for P C Issues, voice Issues, Software issues, login issues, or other issues. ';
 
+// FACTS VARS:
+var FACTS_SKILL_NAME = 'P S E G Cool Facts';
+var AWARDS_SKILL_NAME = 'P S E G Awards';
+var GET_FACT_MESSAGE = "Here's your cool fact: ";
+var HELP_REPROMPT = "What can I help you with?";
+
+// SAFETY TIP VARS:
+var ElectricSafety=[
+    'One must always be cautious around live wires and large electric machines. Always assume high voltages and use caution when working near electricity.',
+    'When unplugging a cord, pull on the cord at the outlet rather than tug on the cord itself. This helps keep the connector damage-free',
+    'Check power and extension cords regularly for frays, cracks, or kinks. These small issues could potentially create risk in any environment.',
+    'If you see a fallen electrical wire, stay away from it. Call P. S. E. G. at 1-800-436-PSEG  to report the downed wire. This call will schedule an inspection and the wire will be fixed as soon as possible.',
+    'Never stick your fingers or any object into an electrical outlet or light bulb socket. You could get shocked!',
+    'Treat every power line as if it were a "live" wire and dangerous.',
+    'Remember that a turned-off appliance is still connected to electricity until it is unplugged',
+    'Before you begin digging outside, make sure to call 1-800-272-1000 to make sure you don’t begin digging atop an important pipe or wire.',
+    'Don’t ever climb the power or telephone poles for any reason. Special equipment and training is required to climb',
+    'Use caution when putting nails in your walls. You might not realize that power cables could be running through many walls of your home!',
+    'Instead of using multiple splitters and surge protectors, relocate wires to evenly distribute the energy needs of your home'
+    ];
+var GasSafety=[
+    'If you smell gas, open a window, leave the building and call 1-800-880-P. S. E. G. to report the problem.',
+    'Provide enough ventilation for gas appliances to burn correctly and make sure no air vents or chimneys are blocked.',
+    'Make sure you have a carbon monoxide alarm installed and checked regularly. A simple alarm will be able to notify an entire house of a harmful gas buildup.',
+    'A distinctive odor, like rotten eggs, is added to natural gas to help assist in the detection of leaks, though it should not be solely relied upon to provide warning. For more safety info, visit p s e g dot com.',
+    'Ensure that your gas pipework, appliances and flues are regularly maintained. Quickly check your pipes every so often to ensure a proper system.',
+    'Before you begin digging outside, make sure to call 1-800-272-1000 to make sure you don’t begin digging atop an important pipe or wire.',
+    'Teach your family members or children what to do if someone smells gas. Everyone should leave the area, and someone should call 1-800-880-PSEG',
+    'Never try to locate a gas leak yourself. Get out of the area and dial 1-800-880-P. S. E. G.',
+    'Do not cook wearing loose garments that can catch fire',
+    'Do not use the kitchen range or oven as a space heater.',
+    'Do not chain a pet to a gas meter or piping.',
+    'Do not sleep in a room with an non-vented gas or kerosene heater'
+    ];
+var SafeDriving=[
+    'Follow speed limits',
+    'Don’t text and drive',
+    'Buckle up whenever you are in a car',
+    'Practice defensive driving',
+    'Be extra careful in bad weather',
+    'Do not drive when drowsy',
+    'Do not drink or eat while driving and drive',
+    'Know the route to your destination',
+    'Check your tires for wear and damage problems',
+    'Keep your vehicle maintained.',
+    'Closely monitor other drivers and pedestrians'
+    ];
+var EmployeeSafety=[
+    'Be Aware Of Your Surroundings',
+    'Keep Correct Posture To Protect Your Back',
+    'Take Regular Breaks',
+    'Use Tools And Machines Properly',
+    'Keep Emergency Exits Easily Accessible',
+    'Report Unsafe Conditions To Your Supervisor',
+    'Use Mechanical Aids Whenever Possible',
+    'Stay Sober',
+    'Reduce Workplace Stress',
+    'Wear The Correct Safety Equipment',
+    'Eliminate Fire Hazards'
+    ];
+    
+var GasSafetyCopy=GasSafety.slice();
+var ElectricSafetyCopy=ElectricSafety.slice();
+var SafeDrivingCopy=SafeDriving.slice();
+var EmployeeSafetyCopy=EmployeeSafety.slice();
+
+// HELPER FUNCTIONS:
 function httpsGet(myData, callback) {
     var options = {
         host: 'finance.google.com',
@@ -23,7 +92,7 @@ function httpsGet(myData, callback) {
 
     var req = https.request(options, res => {
         res.setEncoding('utf8');
-        var returnData = "";
+        var returnData = '';
 
         res.on('data', chunk => {
             returnData = returnData + chunk;
@@ -44,6 +113,22 @@ function httpsGet(myData, callback) {
 const languageStrings = {
     'en': {
         translation: {
+            FACTS: [
+                'P S E G employs over 13,000 people across many different areas such as Utilities, Electric, Nuclear, Services, and more.',
+                'In 2016, P S E G was ranked 272nd on the Forbes Fortune 500 list',
+                'In 2017, P S E G was named to Fortune Magazines list of most admired companies, and ranked 8th among electric and gas companies in the United States',
+                'In 2016, P S E G generated over 9 billion dollars in revenues and their total assets amounted to over 40 billion dollars',
+                'P S E and G was recognized as the most reliable utility in the Mid Atlantic Region for 15 years in a row by P A Consulting',
+                'P S E G celebrated its 100th birthday in 2003',
+            ],
+            AWARDS: [
+                'P S E G was named 2017, Investor Owned Utility of the Year, by the Smart Electric Power Alliance for its efforts that add solar power to New Jerseys energy diversity. They have been recognized for building solar farms on landfills.',
+                'In 2017, Human Resources at P S E G development program, People Strong Development Curriculum, recieved a Leadership Excellence Award from HR.com',
+                'In 2016, P S E G was named a Military Friendly Employer by Victory Media',
+                'In 2016, P S E G was honored with the New Jersey Month Great Oak award for their charitable giving programs that supported non-profit organizations in the state.',
+                'In 2016, P S E G was ranked first in financial performance by Public Utilities fortnightly Magazine.',
+                'In 2016, P S E G was ranked the most reliable utility in the Mid-Atlantic region for the 15th year in a row.'
+            ],
             TIPS: [
                 'Install a programmable thermostat and raise the setting to the highest comfortable temperature. You can save 3 to 5 percent on your air conditioning costs for each degree you raise the thermostat.',
                 'Close doors leading to uncooled parts of your home. If you have central air conditioning, close off vents to unused rooms. Keep filters clean.',
@@ -54,24 +139,53 @@ const languageStrings = {
                 'Use timers and motion detectors on indoor and outdoor lighting.',
                 'Replace old appliances with new energy efficient Energy Star appliances.',
                 'If possible, install whole-house fans that bring in cooler night-time air that can pre-cool a house and reduce energy use in the daytime if heat is kept out by closing windows and shades.',
-                'Take advantage of PSE&G’s Home Energy Toolkit which helps you analyze your home energy use to receive customized energy saving tips. ',
-            ],
-            SKILL_NAME: 'P S E G Safety Tips',
-            GET_FACT_MESSAGE: "Here's your safety tip: ",
-            HELP_MESSAGE: 'You can say tell me a safety tip, or, you can say exit... What can I help you with?',
-            HELP_REPROMPT: 'What can I help you with?',
-            STOP_MESSAGE: 'Goodbye!',
+                'Take advantage of PSE&G’s Home Energy Toolkit which helps you analyze your home energy use to receive customized energy saving tips. '
+            ]
         }
     }
+};
+
+function Tips(TipsList, y, TipsListCopy){
+    if(TipsList.length===0) {
+        y.emit(':ask', 'I have already told you all of my Safety Tips for this, would you like to hear them again? Answer MORE FACTS PLEASE! or NO MORE FACTS.', "I'm sorry I don't quite know what you mean, can you repeat?");
+    }
+    var x = Math.floor(Math.random()*TipsList.length); //chooses a random number that will be used to choose a random index in the list
+    y.emit(':tell', TipsList[x]);
+    TipsList.splice(x,1); //eliminates the item from the list
+    return TipsList;
+}
+
+exports.handler = function (event, context, callback) {
+    const alexa = Alexa.handler(event, context);
+    alexa.APP_ID = APP_ID;
+    alexa.resources = languageStrings;
+    alexa.registerHandlers(handlers);
+    alexa.execute();
+    callback(null, 'Hello from Lambda');
 };
 
 var handlers = {
     
     'LaunchRequest': function () {
-        this.emit('Welcome to the P S E G Company Guide. Ask me about what the company does, when it began, who to call for services, or about anything else you would like to know.');
+        this.emit('Welcome to the P S E G Company Guide. Ask me about what the company does, when it began, who to call for services, or anything else you would like to know.');
+    },
+    'AMAZON.HelpIntent': function () {
+        const speechOutput = this.t('HELP_MESSAGE');
+        const reprompt = this.t('HELP_MESSAGE');
+        this.emit(':ask', speechOutput, reprompt);
+    },
+    'AMAZON.CancelIntent': function () {
+        this.emit(':tell', this.t('STOP_MESSAGE'));
+    },
+    'AMAZON.StopIntent': function () {
+        this.emit(':tell', this.t('STOP_MESSAGE'));
+    },
+    'SessionEndedRequest': function () {
+        this.emit(':tell', STOP_MESSAGE);
     },
     
     /***** GROUP LL2 *****/
+    
     // RESTAURANTS
     'FoodHelpIntent' : function () {
         var cType = this.event.request.intent.slots.CuisineType.value; //replace CuisineType with whatever the name of your slot is
@@ -108,7 +222,7 @@ var handlers = {
             this.emit(':tell', 'Right across the street from P S E G is hannas deli.  Great for breakfast or lunch.');
             break;
         case 1:
-            this.emit(':tell', 'There are a choices at the kudoba behind the whole foods at 64 halsey street.');
+            this.emit(':tell', 'There are a lot of choices at the kudoba behind the whole foods at 64 halsey street.');
             break;
         case 2:
             this.emit(':tell', 'Halal guys at 72 halsey street is a great choice for a very filling meal.');
@@ -138,8 +252,8 @@ var handlers = {
     
     // STOCKS
     'stockIntent': function () {
-        httpsGet(myRequest,  (myResult) => { //ignore myRequest it was part of the cookbook example
-            console.log("sent     : " + myRequest); //ignore ^
+        httpsGet(myRequest,  (myResult) => {            // ignore myRequest it was part of the cookbook example
+            console.log("sent     : " + myRequest);
             console.log("received : " + myResult);
             
             this.emit(':tell', 'The price per share for P S E G is ' + myResult[0] + ' dollars. Last updated at ' + myResult[1]);
@@ -147,45 +261,55 @@ var handlers = {
         );
     },
     
-    // PSEG TIPS
+    // PSEG INFO AND TIPS
     'GetNewSavingTipIntent': function () {
         this.emit('GetTip');
     },
-    // helper functions
     'GetTip': function () {
         // Use this.t() to get corresponding language data
         const factArr = this.t('TIPS');
         const factIndex = Math.floor(Math.random() * factArr.length);
         const randomFact = factArr[factIndex];
-        const speechOutput = this.t('GET_FACT_MESSAGE') + randomFact;
+        const speechOutput = this.t(GET_FACT_MESSAGE) + randomFact;
         this.emit(':tellWithCard', speechOutput, this.t('SKILL_NAME'), randomFact);
     },
-    
-    // not needed:
-    'AMAZON.HelpIntent': function () {
-        const speechOutput = this.t('HELP_MESSAGE');
-        const reprompt = this.t('HELP_MESSAGE');
-        this.emit(':ask', speechOutput, reprompt);
+    'CoolFactIntent': function(){
+        this.emit('GetFact');
     },
-    'AMAZON.CancelIntent': function () {
-        this.emit(':tell', this.t('STOP_MESSAGE'));
+    'GetFact': function () {
+        var factArr = this.t('FACTS');
+        var factIndex = Math.floor(Math.random() * factArr.length);
+        var randomFact = factArr[factIndex];
+        var speechOutput = this.t(GET_FACT_MESSAGE) + randomFact;
+        this.emit(':tellWithCard', speechOutput, this.t(FACTS_SKILL_NAME), randomFact);
     },
-    'AMAZON.StopIntent': function () {
-        this.emit(':tell', this.t('STOP_MESSAGE'));
+    'AwardsIntent': function(){
+        this.emit('GetAward');
     },
-    
-    // GENERAL INFO
+    'GetAward': function () {
+        var factArr = this.t('AWARDS');
+        var factIndex = Math.floor(Math.random() * factArr.length);
+        var randomFact = factArr[factIndex];
+        var speechOutput = this.t(GET_FACT_MESSAGE) + randomFact;
+        this.emit(':tellWithCard', speechOutput, this.t(AWARDS_SKILL_NAME), randomFact);
+    },
     'CafIntent': function () {
         this.emit(':tell', 'The P S E G Cafeteria is located on the third floor, take the elevator to the second floor and use the escalator to go get some food.');
     },
     'FactsIntent': function() {
-        this.emit(':tell', 'P S E G, or Public Service Enterprise group is the main energy distributor for New Jersey and Long Island. The company has been around since 1902 and is one of the 10 largest Utilities companies in the country. Wow, that is impressive!');
+        this.emit(':tell', 'P S E G, or Public Service Enterprise group, is the main energy distributor for New Jersey and Long Island. The company has been around since 1902 and is one of the 10 largest utility companies in the country. Wow, that is impressive!');
     },
     'ITInfoIntent': function(){
-        this.emit(':tell', 'The I T department at PSEG is made up of a number of different sub teams such as Network Operations, Security, A P O, I P O, CeeSo, Quality Assurance, and others. They are responsible for large scale technology projects which ensure that customers have the best experience when using our applications and services.');
+        this.emit(':tell', 'The I T department at P S E G is made up of a number of different sub teams such as Network Operations, Security, A P O, I P O, CeeSo, Quality Assurance, and others. They are responsible for large scale technology projects which ensure that customers have the best experience when using our applications and services.');
+    },
+    'BestTeamIntent': function(){
+        this.emit(':tell', 'The I T department is the best department at P S E G, that is where you can find all the best looking interns and employees.');
+    },
+    'IfYouWereRealIntent': function(){
+        this.emit(':tell', 'If I could have a job I would definitely work in the I T department at P S E G. They are the smartest, funniest, and best looking group of employees. I cant even see and I know that.');
     },
     'locationsIntent': function(){
-        this.emit(':tell','The main P S E G headquarters is in Newark New Jersey, however we have offices and power plants in many other locations such as Edison, Salem, and Long Island.');
+        this.emit(':tell','The main P S E G headquarters is in Newark New Jersey, however there are offices and power plants in many other locations such as Edison, Salem, and Long Island.');
     }, 
     'ceoIntent': function(){
         this.emit(':tell', 'Ralph Izzo is the C E O of P S E G, he has held this position for the last 10 years.');
@@ -212,6 +336,59 @@ var handlers = {
     'powerOutage': function(){
         this.emit(':tell', 'Call 1 8 hundred, 8 8 0, 7 7 3 4 to report a power outage.');
     },
+    'HelpDeskIntent' : function(){
+        this.emit(':ask', anyIssue + "you may ask again if you need more help", CONTINUE);
+    },
+    'CallEightIntent' : function(){
+        this.emit(':ask', SoftwareIssue + "you may ask again if you need more help", CONTINUE);
+    },
+    'CallSevenIntent' : function(){
+        this.emit(':ask', voiceIssue + "you may ask again if you need more help", CONTINUE);
+    },
+    'numberIntent' : function(){
+        this.emit(':ask',number + "you may ask again if you need more help", CONTINUE);
+    },
+    'Unhandled': function() {
+    this.emit(':ask', unknown, unknown);
+    },
+    
+    // SAFETY
+    'SafetyIntent': function(){
+        /* generalized intent that will use the function to go through the list
+        and choose a random fact to be stated and removed from the list */
+        var b=this;
+        var safetyType=b.event.request.intent.slots.safetyType.value;
+        
+        switch(safetyType){
+            case 'electric':
+                ElectricSafety = new Tips(ElectricSafety, b, ElectricSafetyCopy);
+                break;
+            case 'gas':
+                GasSafety = new Tips(GasSafety, b, GasSafetyCopy);
+                break;
+            case 'driving':
+                SafeDriving = new Tips(SafeDriving, b, SafeDrivingCopy);
+                break;
+            case 'employee':
+                EmployeeSafety = new Tips(EmployeeSafety, b, EmployeeSafetyCopy);
+                break;
+            default:
+                b.emit(':tell', "I'm sorry, I do not know any safety tips on that subject.");
+        }
+    },
+    'MoreFactsIntent': function(){
+        /* this intent repopulates every list with the original contents after the user requests
+        more facts to be said and then asks the user again what facts they would like to hear */
+        GasSafety=GasSafetyCopy.slice();
+        ElectricSafety=ElectricSafetyCopy.slice();
+        SafeDriving=SafeDrivingCopy.slice();
+        EmployeeSafety=EmployeeSafety.slice();
+        this.emit(':tell', "Would you like to hear Gas Safety Information, Electric Safety Information, Driving Safety Information, or Employee Safety Information?");
+    },
+    'NoMoreFactsIntent': function(){
+        /* this intent leaves the safety facts lists unpopulated */
+        this.emit(':tell', "Ok.");
+    },
     
     /***** GROUP T17 *****/
     
@@ -230,6 +407,15 @@ var handlers = {
     },
     'HopeCreekAge' : function () {
         this.emit(':tell', 'The construction of Hope creek began in nineteen seventy four.  Commercial service then began in nineteen eighty six.');
+    },
+    'NeedNuclear': function () {
+     this.emit(':tell', 'Nuclear Power Plants in New Jersey produce reliable and clean energy that powers homes and business throughout the state. Using nuclear energy means cleaner air, lower electric bills and economic growth. ');
+    },
+    'CleanNuclear': function () {
+         this.emit(':tell', 'Nuclear energy provides more than ninety percent of New Jerseys pollution-free energy. If nuclear were to be replaced with fossil fuels, fourteen million tons of pollution would be added to the air, this is equivalent to adding 3 million more cars onto the road.');
+    },
+    'ReliNuclear': function () {
+         this.emit(':tell', 'Nuclear energy makes up forty seven percent of electricity in New Jersey, powers two point seven million homes, and runs around the clock. Relying on fossil fuels would cause New Jersey to use more electricity than it produces, not to mention the fluctuation on cost if fossil fuel supplies are disrupted.');
     },
     
     // ACRONYMS

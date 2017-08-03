@@ -1,0 +1,152 @@
+GetNewSavingTipIntent for a tip
+GetNewSavingTipIntent for a saving tip
+GetNewSavingTipIntent to tell me a tip
+GetNewSavingTipIntent to give me a tip to save money
+HelpDeskIntent When is P.S.E.G open
+HelpDeskIntent When is I.T open
+HelpDeskIntent when is the help desk open
+HelpDeskIntent When Can I call {Always}
+HelpDeskIntent When Can I call about {Always}
+HelpDeskIntent When is the help desk open about {Always}
+HelpDeskIntent I need help with {Always}
+HelpDeskIntent when is It open for {Always}
+CallEightIntent When Can I call {CallEight}
+CallEightIntent When Can I call about {CallEight}
+CallEightIntent When is the help desk open about {CallEight}
+CallEightIntent I need help with {CallEight}
+CallEightIntent when is It open for {CallEight}
+CallSevenIntent When Can I call {CallSeven}
+CallSevenIntent When Can I call about {CallSeven}
+CallSevenIntent When is the help desk open about {CallSeven}
+CallSevenIntent I need help with {CallSeven}
+CallSevenIntent when is It open for {CallSeven}
+numberIntent what is the {Always} phone number
+numberIntent what is the phone number for {Always}
+CafIntent where the cafeteria is
+CafIntent where can I eat in the building
+FactsIntent what is P S E G
+FactsIntent what P S E G means
+FactsIntent what P S E G does
+ITInfoIntent what I T is
+ITInfoIntent about the I T department
+locationsIntent is Newark the only P S E G office
+locationsIntent about the other P S E G locations
+ceoIntent who the C E O is
+ceoIntent about Ralph Izzo
+cioIntent who the C I O is
+historyIntent when the company was founded
+historyIntent about our history
+beforeYouDig who I call before I dig
+beforeYouDig who I should call before I dig
+beforeYouDig who I call about digging
+beforeYouDig who I should call about digging
+downedWire how to report a downed wire
+downedWire who I call to report a downed wire
+downedWire who I should call to report a downed wire
+downedWire who I call about a downed wire
+downedWire who I should call about a downed wire
+gasLeak how to report a gas leak
+gasLeak who I call to report a gas leak
+gasLeak who I should call to report a gas leak
+gasLeak who I call about a gas leak
+gasLeak who I should call about a gas leak
+powerOutage how to report a power outage
+powerOutage who I call to report a power outage
+powerOutage who I should call to report a power outage
+powerOutage who I call about a power outage
+powerOutage who I should call about a power outage
+stockIntent about their stocks
+stockIntent what their stock is worth
+stockIntent what our stock price is
+WhatIsNuclear about their nuclear power plant
+WhatIsNuclear what power plants they own
+WhatIsNuclear what power plants they operate
+WhatIsNuclear how many power plants they own
+WhatIsNuclear how many power plants they operate
+WhatIsNuclear where their power plant is
+WhatIsNuclear where their pwoer plant is located
+SalemSpecs about the Salem nuclear generating station
+SalemSpecs about Salem
+SalemSpecs about what the Salem nucelar generating station is able to do
+SalemSpecs about what Salem is able to do
+SalemSpecs about what the Salem nuclear generating station does
+SalemSpecs about what Salem does
+SalemAge how old the Salem nuclear generating stationis
+SalemAge how old Salem is
+SalemAge how long the Salem nuclear generating station has been operating
+SalemAge how long Salem has been operating
+SalemAge when the Salem nuclear generating station was built
+SalemAge when Salem was built
+SalemAge when the Salem nuclear generating station began service
+SalemAge when Salem began service
+HopeCreekSpecs about the Hope Creek nuclear generating station
+HopeCreekSpecs about Hope Creek
+HopeCreekSpecs about what the Hope Creek nucelar generating station is able to do
+HopeCreekSpecs about what Hope Creek is able to do
+HopeCreekSpecs about what the Hope Creek nuclear generating station does
+HopeCreekSpecs about what Hope Creek does
+HopeCreekAge how old the Hope Creek nuclear generating station is
+HopeCreekAge how old Hope Creek is
+HopeCreekAge how long the Hope Creek nuclear generating station has been operating
+HopeCreekAge how long Hope Creek has been operating
+HopeCreekAge when the Hope Creek nuclear generating station was built
+HopeCreekAge when Hope Creek was built
+HopeCreekAge when the Hope Creek nuclear generating station began service
+HopeCreekAge when Hope Creek began service
+FoodHelpIntent where I can find {CuisineType} food
+FoodHelpIntent where I can find {CuisineType}
+FoodHelpIntent where I can get {CuisineType} food
+FoodHelpIntent where I can get {CuisineType}
+FoodHelpIntent where I can go to get {CuisineType} food
+FoodHelpIntent where I can go to get {CuisineType}
+acronymHelper what {AcronymName} stands for
+acronymHelper what {AcronymName} means
+FoodRandomIntent where I can eat outside of the building
+FoodRandomIntent what restaurants are in the area
+FoodRandomIntent where I should go to eat today
+FoodRandomIntent where I should go for lunch today
+NeedNuclear Why does New Jersey need nuclear
+NeedNuclear What is N J needs nuclear
+NeedNuclear What is New Jersey needs nuclear
+CleanNuclear Why does nuclear energy provide cleaner air
+CleanNuclear How does nuclear energy provide cleaner air
+CleanNuclear What is so good about nuclear energy
+ReliNuclear Why is nuclear energy reliable
+ReliNuclear How is nuclear energy reliable
+ReliNuclear What makes nuclear energy reliable
+MoreFactsIntent For more Facts Please
+MoreFactsIntent For more Facts
+NoMoreFactsIntent For no More Facts
+NoMoreFactsIntent For no More Facts Please
+SafetyIntent To tell me about {safetyType} Safety
+SafetyIntent To give me advice about staying safe
+SafetyIntent Can you give me advice about staying safe
+SafetyIntent To give me a fact about {safetyType} safety
+SafetyIntent For a {safetyType} safety fact
+SafetyIntent To give me a {safetyType} safety fact
+SafetyIntent To tell me about {safetyType} safety
+SafetyIntent What is a {safetyType} safety fact
+SafetyIntent For facts about {safetyType} safety
+SafetyIntent What do you know about {safetyType} Safety
+SafetyIntent About {safetyType} Safety Information
+SafetyIntent How can I practice {safetyType} safety at work
+SafetyIntent What is an example of {safetyType} safety
+SafetyIntent To give me an example of {safetyType} safety
+SafetyIntent For an interesting fact about {safetyType} safety
+SafetyIntent For a fun fact about {safetyType} safety
+SafetyIntent What can I learn about {safetyType} safety
+SafetyIntent For any cool things to know about {safetyType} safety
+SafetyIntent What kind of things do you know about {safetyType} safety
+SafetyIntent How can I improve my {safetyType} safety
+SafetyIntent What's one of your favorite {safetyType} safety facts
+CoolFactIntent To tell me something cool about P S E G
+CoolFactIntent To give me a cool fact about P S E G
+CoolFactIntent For a random fact about P S E G
+CoolFactIntent To say something cool about P S E G
+AwardsIntent To tell me some awards P S E G has won
+AwardsIntent what awards has P S E G won
+BestTeamIntent who the best department at P S E G is
+BestTeamIntent where can I find all the best looking interns
+BestTeamIntent what department do you think is the best at P S E G
+IfYouWereRealIntent if you had a job where would you work
+IfYouWereRealIntent if you could work anywhere where would it be

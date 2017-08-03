@@ -1,0 +1,166 @@
+{
+  "intents": [
+    {
+      "intent": "AMAZON.PauseIntent"
+    },
+    {
+      "intent": "AMAZON.ResumeIntent"
+    },
+    {
+      "intent": "AMAZON.CancelIntent"
+    },
+    {
+      "intent": "AMAZON.HelpIntent"
+    },
+    {
+      "intent": "AMAZON.StopIntent"
+    },
+    {
+      "intent": "GetNewSavingTipIntent"
+    },
+    {
+      "slots": [
+        {
+          "name": "Always",
+          "type": "Always"
+        }
+      ],
+      "intent": "HelpDeskIntent"
+    },
+    {
+      "slots": [
+        {
+          "name": "CallEight",
+          "type": "CallEight"
+        }
+      ],
+      "intent": "CallEightIntent"
+    },
+    {
+      "slots": [
+        {
+          "name": "CallSeven",
+          "type": "CallSeven"
+        }
+      ],
+      "intent": "CallSevenIntent"
+    },
+    {
+      "slots": [
+        {
+          "name": "Always",
+          "type": "Always"
+        }
+      ],
+      "intent": "numberIntent"
+    },
+    {
+      "intent": "CafIntent"
+    },
+    {
+      "intent": "FactsIntent"
+    },
+    {
+      "intent": "ITInfoIntent"
+    },
+    {
+      "intent": "locationsIntent"
+    },
+    {
+      "intent": "ceoIntent"
+    },
+    {
+      "intent": "cioIntent"
+    },
+    {
+      "intent": "historyIntent"
+    },
+    {
+      "intent": "beforeYouDig"
+    },
+    {
+      "intent": "downedWire"
+    },
+    {
+      "intent": "gasLeak"
+    },
+    {
+      "intent": "powerOutage"
+    },
+    {
+      "intent": "stockIntent"
+    },
+    {
+      "intent": "WhatIsNuclear"
+    },
+    {
+      "intent": "SalemSpecs"
+    },
+    {
+      "intent": "SalemAge"
+    },
+    {
+      "intent": "HopeCreekSpecs"
+    },
+    {
+      "intent": "HopeCreekAge"
+    },
+    {
+      "slots": [
+        {
+          "name": "CuisineType",
+          "type": "FOODS"
+        }
+      ],
+      "intent": "FoodHelpIntent"
+    },
+    {
+      "slots": [
+        {
+          "name": "AcronymName",
+          "type": "ACRONYMS"
+        }
+      ],
+      "intent": "acronymHelper"
+    },
+    {
+      "intent": "FoodRandomIntent"
+    },
+    {
+      "intent": "NeedNuclear"
+    },
+    {
+      "intent": "CleanNuclear"
+    },
+    {
+      "intent": "ReliNuclear"
+    },
+    {
+      "intent": "MoreFactsIntent"
+    },
+    {
+      "intent": "NoMoreFactsIntent"
+    },
+    {
+      "slots": [
+        {
+          "name": "safetyType",
+          "type": "SAFETY_TYPE"
+        }
+      ],
+      "intent": "SafetyIntent"
+    },
+    {
+      "intent": "CoolFactIntent"
+    },
+    {
+      "intent": "AwardsIntent"
+    },
+    {
+      "intent": "BestTeamIntent"
+    },
+    {
+      "intent": "IfYouWereRealIntent"
+    }
+  ]
+}

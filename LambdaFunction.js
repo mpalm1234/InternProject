@@ -443,14 +443,26 @@ var handlers = {
             case 'ASO':
                 say = 'A S O stands for Application Support Office';
                 break;
+            case 'BGS':
+                say = 'B G S stands for Basic Generation Service';
+                break;
+            case 'BGSS':
+                say = 'B G S S stands for Basic Gas Supply Service';
+                break;
             case 'BI':
                 say = 'B I stands for Business Intelligence';
                 break;
             case 'BP':
                 say = 'B P stands for Business Partner';
                 break;
+            case 'BPL':
+                say = 'B P L stands for Body Politic Lighting';
+                break;
             case 'BPM':
                 say = 'B P M stands for Business Process Management';
+                break;
+            case 'BPU':
+                say = 'B P U stands for Board of PUblic Utilities';
                 break;
             case 'BR':
                 say = 'B R stands for Business Requirements';
@@ -466,6 +478,9 @@ var handlers = {
                 break;
             case 'CI':
                 say = 'C I stands for Configuration Management';
+                break;
+            case 'CIEP':
+                say = 'C I E P stands for Commerical adn Industrial Energy Pricing';
                 break;
             case 'CISO':
                 say = 'C I S O stands for Chief Information Security Office';
@@ -506,6 +521,18 @@ var handlers = {
             case 'FTE':
                 say = 'F T E stands for Full Time Employment';
                 break; 
+            case 'GLP':
+                say = 'G L P stands for General Lighting and Power';
+                break;
+            case 'GSG':
+                say = 'G S G stands for General Service Gas';
+                break;
+            case 'HS':
+                say = 'H S stands for Heating Service';
+                break;
+            case 'HTS':
+                say = 'H T S stands for High Tension Service';
+                break;
             case 'IM':
                 say = 'I M stands for Infrastruction Management';
                 break;
@@ -518,8 +545,20 @@ var handlers = {
             case 'IVR':
                 say = 'I V R stands for Interactive Voice Response';
                 break;
+            case 'KWH':
+                say = 'K W H stands for Kilowatt Hour';
+                break;
             case 'LOB':
                 say = 'L O B stands for Line of Business';
+                break;
+            case 'LPL':
+                say = 'L P L stands for Large Power and Lighting';
+                break;
+            case 'LVG':
+                say = 'L V G stands for Large Volume Gas';
+                break;
+            case 'MAC':
+                say = 'M A C stands for Margin Adjustment Charge';
                 break;
             case 'MM':
                 say = 'M M stands for Material Management';
@@ -542,6 +581,9 @@ var handlers = {
             case 'PCR':
                 say = 'P C R stands for Personal Change Request';
                 break;
+            case 'PEP':
+                say = 'P E P stands for Purchased Electric Power';
+                break;
             case 'PII':
                 say = 'P I I stands for Personal Identifying Information';
                 break;
@@ -554,8 +596,17 @@ var handlers = {
             case 'POC':
                 say = 'P O C stands for Proof of Concept';
                 break;
+            case 'POF':
+                say = 'P O F stands for Publically Owned Facilities';
+                break;
             case 'PPQA':
                 say = 'P P Q A stands for Process and Product Quality Assurance';
+                break;
+            case 'PSAL':
+                say = 'P S A L stands for Private Street and Area Lighting';
+                break;
+            case 'PSEG':
+                say = 'P S E G stands for Public Service Enterprise Group';
                 break;
             case 'PSI':
                 say = 'P S I stands for Project Schedule Index';
@@ -566,11 +617,20 @@ var handlers = {
             case 'PT':
                 say = 'P T stands for Performance Testing';
                 break;
+            case 'PTC':
+                say = 'P T C stands for Price to Compare';
+                break;
             case 'RCA':
                 say = 'R C A stands for Root Cause Analysis';
                 break;
+            case 'RHS':
+                say = 'R H S stands for Residential Heating Service';
+                break;
             case 'RICEFW':
                 say = 'R I C E F W stands for Reports, Interface, Conversation, Enhancements, Forms, and Workflow';
+                break;
+            case 'RLM':
+                say = 'R L M stands for Residential Load Management';
                 break;
             case 'RNC':
                 say = 'R N C stands for Risk and Contingency';
@@ -581,8 +641,20 @@ var handlers = {
             case 'RPA':
                 say = 'R P A stands for Robotic Process Automation';
                 break;
+            case 'RS':
+                say = 'R S stands for Residential Service';
+                break;
+            case 'RSG':
+                say = 'R S G stands for Residential Service Gas';
+                break;
+            case 'SBC':
+                say = 'S B C stands for Societal Benefits Charge';
+                break;
             case 'SLA':
                 say = 'S L A stands for Service Level Agreement';
+                break;
+            case 'SLG':
+                say = 'S L G stands for Street Lighting Gas';
                 break;
             case 'SLO':
                 say = 'S L O stands for Service Level';
@@ -616,6 +688,12 @@ var handlers = {
                 break;
             case 'WBS':
                 say = 'W B S stands for Work Breakdown Structure';
+                break;
+            case 'WH':
+                say = 'W H stands for Water Heating';
+                break;
+            case 'WHS':
+                say = 'W H S stands for Water Heating Storage';
                 break;
             case 'WM':
                 say = 'W M stands for Work Management';

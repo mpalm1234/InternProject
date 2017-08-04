@@ -1,2 +1,0 @@
-acronymHelper what does {AcronymName} stand for
-acronymHelper what does {AcronymName} mean

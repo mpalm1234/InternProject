@@ -74,14 +74,19 @@ a. r. d.
 a. r. t.
 a. s. d.
 a. s. o.
+b. g. s.
+b. g. s. s.
 b. i.
 b. p.
+b. p. l.
 b. p. m.
+b. p. u.
 b. r. 
 b. v. a.
 b. v. s. 
 c. b. t.
 c. i.
+c. i. e. p.
 c. i. s. o.
 c. m. d. b.
 c. s. r.
@@ -95,11 +100,19 @@ f. o.
 f. r.
 f. r. r. b.
 f. t. e.
+g. l. p.
+g. s. g.
+h. s.
+h. t. s.
 i. m.
 i. r. d.
 i. s. o.
 i. v. r.
+k. w. h.
 l. o. b.
+l. p. l.
+l. v. g.
+m. a. c.
 m. m.
 n. f. r.
 o. g. c.
@@ -107,20 +120,31 @@ o. l.
 p. a.
 p. c. i.
 p. c. r.
+p. e. p.
 p. i. i.
 p. i. r.
 p. o.
 p. o. c.
+p. o. f.
 p. p. q. a.
+p. s. a. l.
+p. s. e. g.
 p. s. i.
 p. s. r.
 p. t.
+p. t. c.
 r. c. a.
+r. h. s.
 r. i. c. e. f. w.
+r. l. m.
 r. n. c.
 r. o. m.
 r. p. a.
+r. s.
+r. s. g.
+s. b. c.
 s. l. a.
+s. l. g.
 s. l. o.
 s. l. t.
 s. m. e.
@@ -132,5 +156,7 @@ t. d. d.
 u. a. t.
 u. p. o.
 w. b. s.
+w. h.
+w. h. s.
 w. m.
 x. i.

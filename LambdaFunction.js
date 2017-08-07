@@ -7,13 +7,14 @@ const APP_ID = 'amzn1.ask.skill.1e041c80-9217-4ddb-b923-295e425d4ea8';
 
 // HELP QUESTIONS VARS:
 var CONTINUE= 'If you want to continue I can tell you hours for P C issues, voice issues, software issues, login issues, or other issues. ';
+var moreHelp = '. You may ask again if you need more help.';
 var unknown = 'I did not understand that.';
-var moreHelp = "you may ask again if you need more help.";
 
+// PHONE NUMBERS:
 var digPhone = '1 8 hundred, 2 7 2, 1 0 0 0.';
 var problemPhone = '1 8 hundred, 8 8 0, 7 7 3 4.';
 var psegPhone = '1 8 hundred, 4 3 6, P S E G.';
-var psegPhone2 = '1 eight hundred. 8 8 0. P S E G.';
+var psegPhone2 = '1 8 hundred, 8 8 0, P S E G.';
 var helpPhone = '1, 8 7 7, 4 3 0, 7 5 0 0.';
 
 // FACTS VARS:
@@ -162,7 +163,7 @@ exports.handler = function (event, context, callback) {
     alexa.resources = languageStrings;
     alexa.registerHandlers(handlers);
     alexa.execute();
-    callback(null, 'Hello from Lambda.');
+    //callback(null, 'Hello from Lambda.');
 };
 
 var START_MESSAGE = 'Welcome to the P S E G Company Guide. Ask me anything you would like to know about the company.';
@@ -340,8 +341,9 @@ var handlers = {
     'powerOutage': function(){
         this.emit(':tell', 'Call' + problemPhone + 'to report a power outage.');
     },
+    
     'HelpDeskIntent' : function(){
-        this.emit(':ask', 'The help desk is open twenty four seven.' + moreHelp, CONTINUE);
+        this.emit(':ask', 'The help desk is open twenty four seven. ' + moreHelp, CONTINUE);
     },
     'CallEightIntent' : function(){
         this.emit(':ask', 'The help desk is open for Premium Software issues Monday through Friday from 8:30 A M to 5 P M. ' + moreHelp, CONTINUE);

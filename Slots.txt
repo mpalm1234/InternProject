@@ -85,7 +85,6 @@ b. r.
 b. v. a.
 b. v. s. 
 c. b. t.
-c. i.
 c. i. e. p.
 c. i. s. o.
 c. m. d. b.
@@ -116,7 +115,6 @@ m. a. c.
 m. m.
 n. f. r.
 o. g. c.
-o. l.
 p. a.
 p. c. i.
 p. c. r.
@@ -145,8 +143,6 @@ r. s. g.
 s. b. c.
 s. l. a.
 s. l. g.
-s. l. o.
-s. l. t.
 s. m. e.
 s. n.
 s. o. w.

@@ -4,9 +4,6 @@ var Alexa = require('alexa-sdk');
 var https = require('https');
 var myRequest = '';
 const APP_ID = 'amzn1.ask.skill.1e041c80-9217-4ddb-b923-295e425d4ea8';
-var HELP_MESSAGE = 'Ask me anythig you would like to know about P S E G.';
-var STOP_MESSAGE = 'Goodbye. ';
-var unknown = 'I did not understand that.';
 
 // HELP QUESTIONS VARS:
 var anyIssue = 'The help desk is open twenty four seven. ';
@@ -14,6 +11,7 @@ var voiceIssue = 'The help desk is open for voice and Phone issues Monday throug
 var SoftwareIssue = 'The help desk is open for Premium Software issues Monday through Friday from 8:30 A M to 5 P M. ';
 var number = 'The help desk phone number is: 1 877 430 7500. ';
 var CONTINUE= 'If you want to continue I can tell you hours for P C issues, voice issues, software issues, login issues, or other issues. ';
+var unknown = 'I did not understand that.';
 
 // FACTS VARS:
 var FACTS_SKILL_NAME = 'P S E G Cool Facts';
@@ -164,10 +162,13 @@ exports.handler = function (event, context, callback) {
     callback(null, 'Hello from Lambda.');
 };
 
+var START_MESSAGE = 'Welcome to the P S E G Company Guide. Ask me anything you would like to know about the company.';
+var HELP_MESSAGE = 'Ask me anythig you would like to know about P S E G.';
+var STOP_MESSAGE = 'Goodbye. ';
 var handlers = {
     
     'LaunchRequest': function () {
-        this.emit('Welcome to the P S E G Company Guide. Ask me about what the company does, when it began, who to call for services, or anything else you would like to know.');
+        this.emit(':tell', START_MESSAGE);
     },
     'AMAZON.HelpIntent': function () {
         const speechOutput = this.t('HELP_MESSAGE');
@@ -188,7 +189,7 @@ var handlers = {
     
     // RESTAURANTS
     'FoodHelpIntent' : function () {
-        var cType = this.event.request.intent.slots.CuisineType.value; //replace CuisineType with whatever the name of your slot is
+        var cType = this.event.request.intent.slots.CuisineType.value;
         switch(cType) {
         case 'sandwich':
         case 'sandwiches':
@@ -252,7 +253,7 @@ var handlers = {
     
     // STOCKS
     'stockIntent': function () {
-        httpsGet(myRequest,  (myResult) => {            // ignore myRequest it was part of the cookbook example
+        httpsGet(myRequest,  (myResult) => {            // ignore myRequest, it was part of the cookbook example
             console.log("sent     : " + myRequest);
             console.log("received : " + myResult);
             

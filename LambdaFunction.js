@@ -6,12 +6,15 @@ var myRequest = '';
 const APP_ID = 'amzn1.ask.skill.1e041c80-9217-4ddb-b923-295e425d4ea8';
 
 // HELP QUESTIONS VARS:
-var anyIssue = 'The help desk is open twenty four seven. ';
-var voiceIssue = 'The help desk is open for voice and Phone issues Monday through Friday from 7 A M to 5 P M. ';
-var SoftwareIssue = 'The help desk is open for Premium Software issues Monday through Friday from 8:30 A M to 5 P M. ';
-var number = 'The help desk phone number is: 1 877 430 7500. ';
 var CONTINUE= 'If you want to continue I can tell you hours for P C issues, voice issues, software issues, login issues, or other issues. ';
 var unknown = 'I did not understand that.';
+var moreHelp = "you may ask again if you need more help.";
+
+var digPhone = '1 8 hundred, 2 7 2, 1 0 0 0.';
+var problemPhone = '1 8 hundred, 8 8 0, 7 7 3 4.';
+var psegPhone = '1 8 hundred, 4 3 6, P S E G.';
+var psegPhone2 = '1 eight hundred. 8 8 0. P S E G.';
+var helpPhone = '1, 8 7 7, 4 3 0, 7 5 0 0.';
 
 // FACTS VARS:
 var FACTS_SKILL_NAME = 'P S E G Cool Facts';
@@ -24,28 +27,28 @@ var ElectricSafety=[
     'While around live wires and large machines, always assume high voltages and use caution.',
     'When unplugging a cord, pull on the cord at the base rather than tugging on the cord itself to keep connector damage-free.',
     'Check power and extension cords regularly for frays, cracks, or kinks.',
-    'If you see a fallen electrical wire, stay away from it. Call P S E G at 1 eight hundred. 4 3 6. P S E G. to report the downed wire.',
+    'If you see a fallen electrical wire, stay away from it. Call P S E G at' + psegPhone + 'to report the downed wire.',
     'Never stick your fingers or any object into an electrical outlet or light bulb socket. You could get shocked!',
     'Treat every power line as if it were a live wire.',
     'Remember that a turned-off appliance is still connected to electricity until it is unplugged.',
-    'Before you begin digging outside, call 1 eight hundred. 2 7 2. 1 0 0 0. to make sure you don’t dig atop a pipe or wire.',
+    'Before you begin digging outside, call' + digPhone + 'to make sure you don’t dig atop a pipe or wire.',
     'Don’t ever climb the power or telephone poles for any reason. Special equipment and training is required to climb them.',
     'When putting nails in your walls, check to make sure there are not any power cables running through the walls in that area.',
     'Instead of using multiple splitters and surge protectors, relocate wires to evenly distribute the energy needs of your home.'
     ];
 var GasSafety=[
-    'If you smell gas, make sure to open a window and leave the building. Then call 1 eight hundred. 8 8 0. P S E G. to report the problem.',
+    'If you smell gas, make sure to open a window and leave the building. Then call' + psegPhone2 + 'to report the problem.',
     'Provide enough ventilation for gas appliances to burn correctly and make sure no air vents or chimneys are blocked.',
     'A carbon monoxide alarm will be able to notify an entire house of a harmful gas buildup. Make sure to have one installed and checked regularly. ',
     'A distinctive odor, like rotten eggs, is added to natural gas to help assist in the detection of leaks. For more info about this, visit p s e g dot com.',
     'Ensure that your gas pipework, appliances, and flues are regularly maintained. Quickly check your pipes every so often to ensure a proper system.',
-    'Before you begin digging outside, make sure to call 1 eight hundred. 2 7 2. 1 0 0 0 to make sure you don’t begin digging atop an important pipe or wire.',
-    'Ensure that your family members know what to do if someone smells gas. Everyone should leave the area and someone should call 1 eight hundred. 8 8 0. P S E G.',
-    'Never try to locate a gas leak yourself. Get out of the area and dial 1 eight hundred. 8 8 0. P S E G for help.',
+    'Before you begin digging outside, make sure to call' + digPhone + 'to make sure you don’t begin digging atop an important pipe or wire.',
+    'Ensure that your family members know what to do if someone smells gas. Everyone should leave the area and someone should call' + psegPhone2 + 'for help.',
     'Do not cook wearing loose garments. These can mistakenly catch fire.',
     'Never use the kitchen range or oven as a space heater.',
     'Never chain a pet to a gas meter or piping.',
-    'Do not sleep in a room with a non-vented gas or kerosene heater.'
+    'Do not sleep in a room with a non-vented gas or kerosene heater.',
+    'Never try to locate a gas leak yourself. Get out of the area and dial' + psegPhone2 + 'for help.'
     ];
 var SafeDriving=[
     'Follow the posted speed limits.',
@@ -115,7 +118,7 @@ const languageStrings = {
                 'P S E G employs over thirteen thousand people across many different areas such as Utilities, Electric, Nuclear, Services, and more.',
                 'In twenty sixteen, P S E G was ranked number 2 7 2 on the Forbes Fortune Five hundred list.',
                 'In twenty seventeen, P S E G was named to Fortune Magazines list of most admired companies, and ranked eighth among electric and gas companies in the United States.',
-                'In twenty sixteen, P S E G generated over 9 billion dollars in revenue and their total assets amounted to over 40 billion dollars.',
+                'In twenty sixteen, P S E G generated over nine billion dollars in revenue and their total assets amounted to over forty billion dollars.',
                 'P S E and G was recognized as the most reliable utility in the Mid Atlantic Region for fifteen years in a row by P A Consulting.',
                 'P S E G celebrated its one hundreth birthday in two thousand three.',
             ],
@@ -128,7 +131,7 @@ const languageStrings = {
                 'In twenty sixteen, P S E G was ranked the most reliable utility in the Mid-Atlantic region for the fifteenth year in a row.'
             ],
             TIPS: [
-                'Install a programmable thermostat and raise the setting to the highest comfortable temperature. You can save 3 to 5 percent on your air conditioning costs for each degree you raise the thermostat.',
+                'Install a programmable thermostat and raise the setting to the highest comfortable temperature. You can save three to five percent on your air conditioning costs for each degree you raise the thermostat.',
                 'Close doors leading to uncooled parts of your home. If you have central air conditioning, close off vents to unused rooms and keep filters clean.',
                 'Even if you have air conditioning, use ceiling and or other fans to provide additional cooling and better circulation.',
                 'Seal holes and cracks around doors and windows with foam insulation or weather-stripping.',
@@ -197,7 +200,7 @@ var handlers = {
             this.emit(':tell', 'Right across the street from P S E G is hannas deli. Cafe Airlie, located at 32 commerce street, is also really good.');
             break;
         case 'Mexican':
-            this.emit(':tell', 'There is a Q dough bu behind the whole foods at 64 halsey street.  You can also try darios located at 20 academy street.');
+            this.emit(':tell', 'There is a Q dough ba behind the whole foods at 64 halsey street.  You can also try darios located at 20 academy street.');
             break;
         case 'mediterranean':
             this.emit(':tell', 'Try halal guys at 72 halsey street.');
@@ -223,7 +226,7 @@ var handlers = {
             this.emit(':tell', 'Right across the street from P S E G is hannas deli.  Great for breakfast or lunch.');
             break;
         case 1:
-            this.emit(':tell', 'There are a lot of choices at the Q dough bu behind the whole foods at 64 halsey street.');
+            this.emit(':tell', 'There are a lot of choices at the Q dough ba behind the whole foods at 64 halsey street.');
             break;
         case 2:
             this.emit(':tell', 'Halal guys at 72 halsey street is a great choice for a very filling meal.');
@@ -326,29 +329,28 @@ var handlers = {
     
     // HELP QUESTIONS
     'beforeYouDig': function() {
-        this.emit(':tell', 'Call 1 8 hundred, 2 7 2, 1 0 0 0');
+        this.emit(':tell', 'Call' + digPhone);
     },
     'gasLeak': function(){
-        this.emit(':tell', 'Call 1 8 hundred, 8 8 0, 7 7 3 4 to report a gas leak. In the mean time, be sure to open a window and leave the building.');
+        this.emit(':tell', 'Call' + problemPhone + 'to report a gas leak. In the mean time, be sure to open a window and leave the building.');
     },
     'downedWire': function(){
-        this.emit(':tell', 'Call 1 8 hundred, 8 8 0, 7 7 3 4 to report a downed wire. Be sure to stay away from fallen lines and anything or anyone that may have come in contact with them.');
+        this.emit(':tell', 'Call' + problemPhone + 'to report a downed wire. Be sure to stay away from fallen lines and anything or anyone that may have come in contact with them.');
     },
     'powerOutage': function(){
-        this.emit(':tell', 'Call 1 8 hundred, 8 8 0, 7 7 3 4 to report a power outage.');
+        this.emit(':tell', 'Call' + problemPhone + 'to report a power outage.');
     },
-    // see help question vars at top for the following:
     'HelpDeskIntent' : function(){
-        this.emit(':ask', anyIssue + "you may ask again if you need more help", CONTINUE);
+        this.emit(':ask', 'The help desk is open twenty four seven.' + moreHelp, CONTINUE);
     },
     'CallEightIntent' : function(){
-        this.emit(':ask', SoftwareIssue + "you may ask again if you need more help", CONTINUE);
+        this.emit(':ask', 'The help desk is open for Premium Software issues Monday through Friday from 8:30 A M to 5 P M. ' + moreHelp, CONTINUE);
     },
     'CallSevenIntent' : function(){
-        this.emit(':ask', voiceIssue + "you may ask again if you need more help", CONTINUE);
+        this.emit(':ask', 'The help desk is open for voice and Phone issues Monday through Friday from 7 A M to 5 P M. ' + moreHelp, CONTINUE);
     },
     'numberIntent' : function(){
-        this.emit(':ask',number + "you may ask again if you need more help", CONTINUE);
+        this.emit(':ask', 'The help desk phone number is ' + helpPhone + moreHelp, CONTINUE);
     },
     'Unhandled': function() {
     this.emit(':ask', unknown, unknown);
@@ -478,9 +480,6 @@ var handlers = {
             case 'CBT':
                 say = 'C B T stands for Computer Based Training.';
                 break;
-            case 'CI':
-                say = 'C I stands for Configuration Management.';                   //?
-                break;
             case 'CIEP':
                 say = 'C I E P stands for Commerical adn Industrial Energy Pricing.';
                 break;
@@ -571,9 +570,6 @@ var handlers = {
             case 'OGC':
                 say = 'O G C stands for Ongoing Costs.';
                 break;
-            case 'OL':
-                say = 'O L stands for Online Release.';                             //?
-                break;
             case 'PA':
                 say = 'P A stands for Production Acceptance.';
                 break;
@@ -635,7 +631,7 @@ var handlers = {
                 say = 'R L M stands for Residential Load Management.';
                 break;
             case 'RNC':
-                say = 'R N C stands for Risk and Contingency.';                     //?
+                say = 'R N C stands for Risk and Contingency.';
                 break;
             case 'ROM':
                 say = 'R O M stands for Rough Order of Magnitude.';
@@ -657,12 +653,6 @@ var handlers = {
                 break;
             case 'SLG':
                 say = 'S L G stands for Street Lighting Gas.';
-                break;
-            case 'SLO':
-                say = 'S L O stands for Service Level.';                            //?
-                break;
-            case 'SLT':
-                say = 'S L T stands for Service Level.';                            //?
                 break;
             case 'SME':
                 say = 'S M E stands for Subject Matter Experts.';

@@ -28,28 +28,28 @@ var ElectricSafety=[
     'While around live wires and large machines, always assume high voltages and use caution.',
     'When unplugging a cord, pull on the cord at the base rather than tugging on the cord itself to keep connector damage-free.',
     'Check power and extension cords regularly for frays, cracks, or kinks.',
-    'If you see a fallen electrical wire, stay away from it. Call P S E G at' + psegPhone + 'to report the downed wire.',
+    'If you see a fallen electrical wire, stay away from it. Call P S E G at ' + psegPhone + ' to report the downed wire.',
     'Never stick your fingers or any object into an electrical outlet or light bulb socket. You could get shocked!',
     'Treat every power line as if it were a live wire.',
     'Remember that a turned-off appliance is still connected to electricity until it is unplugged.',
-    'Before you begin digging outside, call' + digPhone + 'to make sure you don’t dig atop a pipe or wire.',
+    'Before you begin digging outside, call ' + digPhone + ' to make sure you don’t dig atop a pipe or wire.',
     'Don’t ever climb the power or telephone poles for any reason. Special equipment and training is required to climb them.',
     'When putting nails in your walls, check to make sure there are not any power cables running through the walls in that area.',
     'Instead of using multiple splitters and surge protectors, relocate wires to evenly distribute the energy needs of your home.'
     ];
 var GasSafety=[
-    'If you smell gas, make sure to open a window and leave the building. Then call' + psegPhone2 + 'to report the problem.',
+    'If you smell gas, make sure to open a window and leave the building. Then call ' + psegPhone2 + ' to report the problem.',
     'Provide enough ventilation for gas appliances to burn correctly and make sure no air vents or chimneys are blocked.',
     'A carbon monoxide alarm will be able to notify an entire house of a harmful gas buildup. Make sure to have one installed and checked regularly. ',
     'A distinctive odor, like rotten eggs, is added to natural gas to help assist in the detection of leaks. For more info about this, visit p s e g dot com.',
     'Ensure that your gas pipework, appliances, and flues are regularly maintained. Quickly check your pipes every so often to ensure a proper system.',
-    'Before you begin digging outside, make sure to call' + digPhone + 'to make sure you don’t begin digging atop an important pipe or wire.',
-    'Ensure that your family members know what to do if someone smells gas. Everyone should leave the area and someone should call' + psegPhone2 + 'for help.',
+    'Before you begin digging outside, make sure to call ' + digPhone + ' to make sure you don’t begin digging atop an important pipe or wire.',
+    'Ensure that your family members know what to do if someone smells gas. Everyone should leave the area and someone should call ' + psegPhone2 + ' for help.',
     'Do not cook wearing loose garments. These can mistakenly catch fire.',
     'Never use the kitchen range or oven as a space heater.',
     'Never chain a pet to a gas meter or piping.',
     'Do not sleep in a room with a non-vented gas or kerosene heater.',
-    'Never try to locate a gas leak yourself. Get out of the area and dial' + psegPhone2 + 'for help.'
+    'Never try to locate a gas leak yourself. Get out of the area and dial ' + psegPhone2 + ' for help.'
     ];
 var SafeDriving=[
     'Follow the posted speed limits.',
@@ -175,15 +175,15 @@ var handlers = {
         this.emit(':tell', START_MESSAGE);
     },
     'AMAZON.HelpIntent': function () {
-        const speechOutput = this.t('HELP_MESSAGE');
-        const reprompt = this.t('HELP_MESSAGE');
+        const speechOutput = this.t(HELP_MESSAGE);
+        const reprompt = this.t(HELP_MESSAGE);
         this.emit(':ask', speechOutput, reprompt);
     },
     'AMAZON.CancelIntent': function () {
-        this.emit(':tell', this.t('STOP_MESSAGE'));
+        this.emit(':tell', this.t(STOP_MESSAGE));
     },
     'AMAZON.StopIntent': function () {
-        this.emit(':tell', this.t('STOP_MESSAGE'));
+        this.emit(':tell', this.t(STOP_MESSAGE));
     },
     'SessionEndedRequest': function () {
         this.emit(':tell', STOP_MESSAGE);
@@ -330,18 +330,17 @@ var handlers = {
     
     // HELP QUESTIONS
     'beforeYouDig': function() {
-        this.emit(':tell', 'Call' + digPhone);
+        this.emit(':tell', 'Call ' + digPhone);
     },
     'gasLeak': function(){
-        this.emit(':tell', 'Call' + problemPhone + 'to report a gas leak. In the mean time, be sure to open a window and leave the building.');
+        this.emit(':tell', 'Call ' + problemPhone + ' to report a gas leak. In the mean time, be sure to open a window and leave the building.');
     },
     'downedWire': function(){
-        this.emit(':tell', 'Call' + problemPhone + 'to report a downed wire. Be sure to stay away from fallen lines and anything or anyone that may have come in contact with them.');
+        this.emit(':tell', 'Call ' + problemPhone + ' to report a downed wire. Be sure to stay away from fallen lines and anything or anyone that may have come in contact with them.');
     },
     'powerOutage': function(){
-        this.emit(':tell', 'Call' + problemPhone + 'to report a power outage.');
+        this.emit(':tell', 'Call ' + problemPhone + ' to report a power outage.');
     },
-    
     'HelpDeskIntent' : function(){
         this.emit(':ask', 'The help desk is open twenty four seven. ' + moreHelp, CONTINUE);
     },

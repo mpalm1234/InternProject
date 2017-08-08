@@ -5,30 +5,24 @@ var https = require('https');
 var myRequest = '';
 const APP_ID = 'amzn1.ask.skill.1e041c80-9217-4ddb-b923-295e425d4ea8';
 
-// HELP QUESTIONS VARS:
-var CONTINUE= 'If you want to continue I can tell you hours for P C issues, voice issues, software issues, login issues, or other issues. ';
-var moreHelp = '. You may ask again if you need more help.';
-var unknown = 'I did not understand that.';
+var START_MESSAGE = 'Welcome to the P S E G Company Guide. Ask me anything you would like to know about the company.';
+var HELP_MESSAGE = 'Ask me anythig you would like to know about P S E G.';
+var STOP_MESSAGE = 'Goodbye. ';
+var UNKNOWN = 'I did not understand that. ';
 
-// PHONE NUMBERS:
+var helpCont= 'If you want to continue I can tell you hours for P C issues, voice issues, software issues, login issues, or other issues. ';
+var moreHelp = 'You may ask again if you need more help. ';
+
 var digPhone = '1 8 hundred, 2 7 2, 1 0 0 0.';
-var problemPhone = '1 8 hundred, 8 8 0, 7 7 3 4.';
-var psegPhone = '1 8 hundred, 4 3 6, P S E G.';
-var psegPhone2 = '1 8 hundred, 8 8 0, P S E G.';
-var helpPhone = '1, 8 7 7, 4 3 0, 7 5 0 0.';
+var urgentPhone = '1 8 hundred, 8 8 0, 7 7 3 4.';
+var helpPhone = '1 8 hundred, 4 3 6, 7 7 3 4.';
+var helpDeskPhone = '1, 8 7 7, 4 3 0, 7 5 0 0.';
 
-// FACTS VARS:
-var FACTS_SKILL_NAME = 'P S E G Cool Facts';
-var AWARDS_SKILL_NAME = 'P S E G Awards';
-var GET_FACT_MESSAGE = "Here's your cool fact: ";
-var HELP_REPROMPT = "What can I help you with?";
-
-// SAFETY TIP VARS:
 var ElectricSafety=[
     'While around live wires and large machines, always assume high voltages and use caution.',
     'When unplugging a cord, pull on the cord at the base rather than tugging on the cord itself to keep connector damage-free.',
     'Check power and extension cords regularly for frays, cracks, or kinks.',
-    'If you see a fallen electrical wire, stay away from it. Call P S E G at ' + psegPhone + ' to report the downed wire.',
+    'If you see a fallen electrical wire, stay away from it. Call P S E G at ' + helpPhone + ' to report the downed wire.',
     'Never stick your fingers or any object into an electrical outlet or light bulb socket. You could get shocked!',
     'Treat every power line as if it were a live wire.',
     'Remember that a turned-off appliance is still connected to electricity until it is unplugged.',
@@ -38,18 +32,18 @@ var ElectricSafety=[
     'Instead of using multiple splitters and surge protectors, relocate wires to evenly distribute the energy needs of your home.'
     ];
 var GasSafety=[
-    'If you smell gas, make sure to open a window and leave the building. Then call ' + psegPhone2 + ' to report the problem.',
+    'If you smell gas, make sure to open a window and leave the building. Then call ' + urgentPhone + ' to report the problem.',
     'Provide enough ventilation for gas appliances to burn correctly and make sure no air vents or chimneys are blocked.',
     'A carbon monoxide alarm will be able to notify an entire house of a harmful gas buildup. Make sure to have one installed and checked regularly. ',
     'A distinctive odor, like rotten eggs, is added to natural gas to help assist in the detection of leaks. For more info about this, visit p s e g dot com.',
     'Ensure that your gas pipework, appliances, and flues are regularly maintained. Quickly check your pipes every so often to ensure a proper system.',
     'Before you begin digging outside, make sure to call ' + digPhone + ' to make sure you don’t begin digging atop an important pipe or wire.',
-    'Ensure that your family members know what to do if someone smells gas. Everyone should leave the area and someone should call ' + psegPhone2 + ' for help.',
+    'Ensure that your family members know what to do if someone smells gas. Everyone should leave the area and someone should call ' + urgentPhone + ' for help.',
     'Do not cook wearing loose garments. These can mistakenly catch fire.',
     'Never use the kitchen range or oven as a space heater.',
     'Never chain a pet to a gas meter or piping.',
     'Do not sleep in a room with a non-vented gas or kerosene heater.',
-    'Never try to locate a gas leak yourself. Get out of the area and dial ' + psegPhone2 + ' for help.'
+    'Never try to locate a gas leak yourself. Get out of the area and dial ' + urgentPhone + ' for help.'
     ];
 var SafeDriving=[
     'Follow the posted speed limits.',
@@ -82,35 +76,6 @@ var GasSafetyCopy=GasSafety.slice();
 var ElectricSafetyCopy=ElectricSafety.slice();
 var SafeDrivingCopy=SafeDriving.slice();
 var EmployeeSafetyCopy=EmployeeSafety.slice();
-
-// HELPER FUNCTIONS:
-function httpsGet(myData, callback) {
-    var options = {
-        host: 'finance.google.com',
-        port: 443,
-        path: '/finance/info?client=ig&q=NASDAQ%3APEG',
-        method: 'GET',
-    };
-
-    var req = https.request(options, res => {
-        res.setEncoding('utf8');
-        var returnData = '';
-
-        res.on('data', chunk => {
-            returnData = returnData + chunk;
-        });
-
-        res.on('end', () => {
-            var stringData = JSON.stringify(returnData);
-            var parsePrice = stringData.substring(79,84);
-            var parseTime = stringData.substring(162,169);
-            var retArr = [parsePrice, parseTime];
-            //callback(price);
-            callback(retArr);
-        });
-    });
-    req.end();
-}
 
 const languageStrings = {
     'en': {
@@ -149,12 +114,40 @@ const languageStrings = {
 
 function Tips(TipsList, y, TipsListCopy){
     if(TipsList.length===0) {
-        y.emit(':ask', 'I have already told you all of my safety tips for this, would you like to hear them again? Answer MORE FACTS PLEASE! or NO MORE FACTS.', "I'm sorry I don't quite know what you mean, can you repeat?");
+        y.emit(':ask', 'I have already told you all of my safety tips for this, would you like to hear them again? Answer MORE FACTS PLEASE! or NO MORE FACTS.', UNKNOWN + 'can you repeat?');
     }
     var x = Math.floor(Math.random()*TipsList.length);  //chooses a random number that will be used to choose a random index in the list
     y.emit(':tell', TipsList[x]);
     TipsList.splice(x,1);                               //eliminates the item from the list
     return TipsList;
+}
+
+function httpsGet(myData, callback) {
+    var options = {
+        host: 'finance.google.com',
+        port: 443,
+        path: '/finance/info?client=ig&q=NASDAQ%3APEG',
+        method: 'GET',
+    };
+
+    var req = https.request(options, res => {
+        res.setEncoding('utf8');
+        var returnData = '';
+
+        res.on('data', chunk => {
+            returnData = returnData + chunk;
+        });
+
+        res.on('end', () => {
+            var stringData = JSON.stringify(returnData);
+            var parsePrice = stringData.substring(79,84);
+            var parseTime = stringData.substring(162,169);
+            var retArr = [parsePrice, parseTime];
+            //callback(price);
+            callback(retArr);
+        });
+    });
+    req.end();
 }
 
 exports.handler = function (event, context, callback) {
@@ -166,9 +159,6 @@ exports.handler = function (event, context, callback) {
     //callback(null, 'Hello from Lambda.');
 };
 
-var START_MESSAGE = 'Welcome to the P S E G Company Guide. Ask me anything you would like to know about the company.';
-var HELP_MESSAGE = 'Ask me anythig you would like to know about P S E G.';
-var STOP_MESSAGE = 'Goodbye. ';
 var handlers = {
     
     'LaunchRequest': function () {
@@ -267,36 +257,26 @@ var handlers = {
     },
     
     // PSEG INFO AND TIPS
-    'GetNewSavingTipIntent': function () {
-        this.emit('GetTip');
-    },
-    'GetTip': function () {
-        // Use this.t() to get corresponding language data
-        const factArr = this.t('TIPS');
-        const factIndex = Math.floor(Math.random() * factArr.length);
-        const randomFact = factArr[factIndex];
-        const speechOutput = this.t(GET_FACT_MESSAGE) + randomFact;
-        this.emit(':tellWithCard', speechOutput, this.t('SKILL_NAME'), randomFact);
-    },
-    'CoolFactIntent': function(){
-        this.emit('GetFact');
-    },
-    'GetFact': function () {
+    'CoolFactIntent': function () {
         var factArr = this.t('FACTS');
         var factIndex = Math.floor(Math.random() * factArr.length);
         var randomFact = factArr[factIndex];
-        var speechOutput = this.t(GET_FACT_MESSAGE) + randomFact;
-        this.emit(':tellWithCard', speechOutput, this.t(FACTS_SKILL_NAME), randomFact);
+        var speechOutput = 'Heres a fact about P S E G: ' + randomFact;
+        this.emit(':tellWithCard', speechOutput, this.t('P S E G Facts'), randomFact);
     },
-    'AwardsIntent': function(){
-        this.emit('GetAward');
+    'AwardsIntent': function () {
+        var awardArr = this.t('AWARDS');
+        var awardIndex = Math.floor(Math.random() * awardArr.length);
+        var randomAward = awardArr[awardIndex];
+        var speechOutput = 'Heres an award P S E G has won: ' + randomAward;
+        this.emit(':tellWithCard', speechOutput, this.t('P S E G Awards'), randomAward);
     },
-    'GetAward': function () {
-        var factArr = this.t('AWARDS');
-        var factIndex = Math.floor(Math.random() * factArr.length);
-        var randomFact = factArr[factIndex];
-        var speechOutput = this.t(GET_FACT_MESSAGE) + randomFact;
-        this.emit(':tellWithCard', speechOutput, this.t(AWARDS_SKILL_NAME), randomFact);
+    'GetNewSavingTipIntent': function () {
+        const tipArr = this.t('TIPS');
+        const tipIndex = Math.floor(Math.random() * tipArr.length);
+        const randomTip = tipArr[tipIndex];
+        const speechOutput = 'Heres your savings tip: ' + randomTip;
+        this.emit(':tellWithCard', speechOutput, this.t('P S E G Tips'), randomTip);
     },
     'CafIntent': function () {
         this.emit(':tell', 'The P S E G Cafeteria is located on the third floor, take the elevator to the second floor and use the escalator to go get some food.');
@@ -333,28 +313,28 @@ var handlers = {
         this.emit(':tell', 'Call ' + digPhone);
     },
     'gasLeak': function(){
-        this.emit(':tell', 'Call ' + problemPhone + ' to report a gas leak. In the mean time, be sure to open a window and leave the building.');
+        this.emit(':tell', 'Call ' + urgentPhone + ' to report a gas leak. In the mean time, be sure to open a window and leave the building.');
     },
     'downedWire': function(){
-        this.emit(':tell', 'Call ' + problemPhone + ' to report a downed wire. Be sure to stay away from fallen lines and anything or anyone that may have come in contact with them.');
+        this.emit(':tell', 'Call ' + urgentPhone + ' to report a downed wire. Be sure to stay away from fallen lines and anything or anyone that may have come in contact with them.');
     },
     'powerOutage': function(){
-        this.emit(':tell', 'Call ' + problemPhone + ' to report a power outage.');
+        this.emit(':tell', 'Call ' + urgentPhone + ' to report a power outage.');
     },
     'HelpDeskIntent' : function(){
-        this.emit(':ask', 'The help desk is open twenty four seven. ' + moreHelp, CONTINUE);
+        this.emit(':ask', 'The help desk is open twenty four seven. ' + moreHelp, helpCont);
     },
     'CallEightIntent' : function(){
-        this.emit(':ask', 'The help desk is open for Premium Software issues Monday through Friday from 8:30 A M to 5 P M. ' + moreHelp, CONTINUE);
+        this.emit(':ask', 'The help desk is open for Premium Software issues Monday through Friday from 8:30 A M to 5 P M. ' + moreHelp, helpCont);
     },
     'CallSevenIntent' : function(){
-        this.emit(':ask', 'The help desk is open for voice and Phone issues Monday through Friday from 7 A M to 5 P M. ' + moreHelp, CONTINUE);
+        this.emit(':ask', 'The help desk is open for voice and Phone issues Monday through Friday from 7 A M to 5 P M. ' + moreHelp, helpCont);
     },
     'numberIntent' : function(){
-        this.emit(':ask', 'The help desk phone number is ' + helpPhone + moreHelp, CONTINUE);
+        this.emit(':ask', 'The help desk phone number is ' + helpDeskPhone + moreHelp, helpCont);
     },
     'Unhandled': function() {
-    this.emit(':ask', unknown, unknown);
+    this.emit(':ask', UNKNOWN, UNKNOWN);
     },
     
     // SAFETY
@@ -425,10 +405,8 @@ var handlers = {
     
     // ACRONYMS
     'acronymHelper': function () {
-        
         var acronym = this.event.request.intent.slots.AcronymName.value;
         var say = "Sorry, I don't know that acronym.";
-        
         switch(acronym) {
             case 'ADR':
                 say = 'A D R stands for Application Design Review.';

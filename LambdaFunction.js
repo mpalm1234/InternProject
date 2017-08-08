@@ -174,7 +174,141 @@ var handlers = {
         this.emit(':tell', STOP_MESSAGE);
     },
     
-    /*************** GROUP LL2 ***************/
+    // PSEG TIPS
+    'GetNewSavingTipIntent': function () {
+        const tipArr = this.t('TIPS');
+        const tipIndex = Math.floor(Math.random() * tipArr.length);
+        const randomTip = tipArr[tipIndex];
+        const speechOutput = 'Heres your savings tip: ' + randomTip;
+        this.emit(':tellWithCard', speechOutput, this.t('P S E G Tips'), randomTip);
+    },
+    'SafetyIntent': function(){
+        var safetyType = this.event.request.intent.slots.safetyType.value;
+        switch(safetyType){
+            case 'electric':
+                ElectricSafety = new Tips(ElectricSafety, this, ElectricSafetyCopy);
+                break;
+            case 'gas':
+                GasSafety = new Tips(GasSafety, this, GasSafetyCopy);
+                break;
+            case 'driving':
+                SafeDriving = new Tips(SafeDriving, this, SafeDrivingCopy);
+                break;
+            case 'employee':
+                EmployeeSafety = new Tips(EmployeeSafety, this, EmployeeSafetyCopy);
+                break;
+            default:
+                this.emit(':tell', "I'm sorry, I do not know any safety tips on that subject.");
+        }
+    },
+    'MoreFactsIntent': function(){      // repopulates safety facts lists with original contents
+        GasSafety=GasSafetyCopy.slice();
+        ElectricSafety=ElectricSafetyCopy.slice();
+        SafeDriving=SafeDrivingCopy.slice();
+        EmployeeSafety=EmployeeSafety.slice();
+        this.emit(':tell', "Would you like to hear Gas Safety Information, Electric Safety Information, Driving Safety Information, or Employee Safety Information?");
+    },
+    'NoMoreFactsIntent': function(){    // leaves safety facts lists unpopulated
+        this.emit(':tell', "Ok. ");
+    },
+    
+    // PSEG Info
+    'CoolFactIntent': function () {
+        var factArr = this.t('FACTS');
+        var factIndex = Math.floor(Math.random() * factArr.length);
+        var randomFact = factArr[factIndex];
+        var speechOutput = 'Heres a fact about P S E G: ' + randomFact;
+        this.emit(':tellWithCard', speechOutput, this.t('P S E G Facts'), randomFact);
+    },
+    'AwardsIntent': function () {
+        var awardArr = this.t('AWARDS');
+        var awardIndex = Math.floor(Math.random() * awardArr.length);
+        var randomAward = awardArr[awardIndex];
+        var speechOutput = 'Heres an award P S E G has won: ' + randomAward;
+        this.emit(':tellWithCard', speechOutput, this.t('P S E G Awards'), randomAward);
+    },
+    'CafIntent': function () {
+        this.emit(':tell', 'The P S E G Cafeteria is located on the third floor, take the elevator to the second floor and use the escalator to go get some food.');
+    },
+    'FactsIntent': function() {
+        this.emit(':tell', 'P S E G, or Public Service Enterprise group, is the main energy distributor for New Jersey and Long Island. The company has been around since nineteen oh two and is one of the ten largest utility companies in the country. Wow, that is impressive!');
+    },
+    'ITInfoIntent': function(){
+        this.emit(':tell', 'The I T department at P S E G is made up of a number of different sub teams such as Network Operations, Security, A P O, I P O, See So, Quality Assurance, and others. They are responsible for large scale technology projects which ensure that customers have the best experience when using our applications and services.');
+    },
+    'locationsIntent': function(){
+        this.emit(':tell','The main P S E G headquarters is in Newark New Jersey, however there are offices and power plants in other locations such as Edison, Salem, and Long Island.');
+    }, 
+    'ceoIntent': function(){
+        this.emit(':tell', 'Ralph Izzo is the C E O of P S E G, he has held this position for the last ten years.');
+    },
+    'cioIntent': function(){
+        this.emit(':tell', 'The C I O is currently Joseph Santamaria.');
+    },
+    'historyIntent': function(){
+        this.emit(':tell', 'P S E G began in nineteen oh three and currently serves almost four million customers in New Jersey with electricity and or gas services.');
+    },
+    'stockIntent': function () {
+        httpsGet(myRequest,  (myResult) => {
+            console.log("sent     : " + myRequest);
+            console.log("received : " + myResult);
+            
+            this.emit(':tell', 'The price per share for P S E G is ' + myResult[0] + ' dollars. Last updated at ' + myResult[1]);
+        }
+        );
+    },
+    
+    // HELP QUESTIONS
+    'beforeYouDig': function() {
+        this.emit(':tell', 'Call ' + digPhone);
+    },
+    'gasLeak': function(){
+        this.emit(':tell', 'Call ' + urgentPhone + ' to report a gas leak. In the mean time, be sure to open a window and leave the building.');
+    },
+    'downedWire': function(){
+        this.emit(':tell', 'Call ' + urgentPhone + ' to report a downed wire. Be sure to stay away from fallen lines and anything or anyone that may have come in contact with them.');
+    },
+    'powerOutage': function(){
+        this.emit(':tell', 'Call ' + urgentPhone + ' to report a power outage.');
+    },
+    'numberIntent' : function(){
+        this.emit(':ask', 'The help desk phone number is ' + helpDeskPhone + MORE_HELP, UNKNOWN);
+    },
+    'HelpDeskIntent' : function(){
+        this.emit(':ask', 'The help desk is open twenty four seven. ' + MORE_HELP, UNKNOWN);
+    },
+    'CallEightIntent' : function(){
+        this.emit(':ask', 'The help desk is open for Premium Software issues Monday through Friday from 8:30 A M to 5 P M. ' + MORE_HELP, UNKNOWN);
+    },
+    'CallSevenIntent' : function(){
+        this.emit(':ask', 'The help desk is open for voice and Phone issues Monday through Friday from 7 A M to 5 P M. ' + MORE_HELP, UNKNOWN);
+    },
+    
+    // NUCLEAR
+    'WhatIsNuclear': function () {
+        this.emit(':tell', 'P S E G Nuclear L L C operates the Salem and Hope Creek Nuclear Generating Stations.  They are located together on one site in Salem County New Jersey.');
+    },
+    'SalemSpecs': function () {
+        this.emit(':tell', 'Salem consists of dual unit pressured water reactors with a total generating capacity of two thousand two hundred and ninety six megawatts.  That is enough to generate enough electricity to power approximately two million homes per day.');
+    },
+    'SalemAge' : function () {
+        this.emit(':tell', 'The construction of Salem began in nineteen sixty eight.  The first unit began commercial service in nineteen seventy seven while the second unit began commercial service in nineteen eighty one.');
+    },
+    'HopeCreekSpecs': function () {
+        this.emit(':tell', 'Hope Creek consists of a single unit boiling water reactor with a total generating capacity of one thousand one hundred and seventy two megawatts.  That is enough to generate enough electricity to power approximately one million homes per day.');
+    },
+    'HopeCreekAge' : function () {
+        this.emit(':tell', 'The construction of Hope creek began in nineteen seventy four.  Commercial service then began in nineteen eighty six.');
+    },
+    'NeedNuclear': function () {
+     this.emit(':tell', 'Nuclear Power Plants in New Jersey produce reliable and clean energy that powers homes and businesses throughout the state. Using nuclear energy means cleaner air, lower electric bills, and economic growth. ');
+    },
+    'CleanNuclear': function () {
+         this.emit(':tell', 'Nuclear energy provides more than ninety percent of New Jerseys pollution-free energy. If nuclear were to be replaced with fossil fuels, fourteen million tons of pollution would be added to the air. This is equivalent to adding 3 million more cars on the roads.');
+    },
+    'ReliNuclear': function () {
+         this.emit(':tell', 'Nuclear energy makes up forty seven percent of electricity in New Jersey, powers two point seven million homes, and runs around the clock. Relying on fossil fuels would cause New Jersey to use more electricity than it produces, not to mention the fluctuation on cost if fossil fuel supplies are disrupted.');
+    },
     
     // RESTAURANTS
     'FoodHelpIntent' : function () {
@@ -204,7 +338,6 @@ var handlers = {
             this.emit(':tell', 'Sorry, I dont know where to find that around here. '); 
         }
     },
-    
     'FoodRandomIntent' : function () {
         var rand = Math.floor(Math.random() * 9);
         switch(rand) {
@@ -239,155 +372,7 @@ var handlers = {
             this.emit(':tell', 'Sorry, I dont know any good places to eat.'); 
         }
     },
-    
-    // STOCKS
-    'stockIntent': function () {
-        httpsGet(myRequest,  (myResult) => {
-            console.log("sent     : " + myRequest);
-            console.log("received : " + myResult);
-            
-            this.emit(':tell', 'The price per share for P S E G is ' + myResult[0] + ' dollars. Last updated at ' + myResult[1]);
-        }
-        );
-    },
-    
-    // PSEG INFO AND TIPS
-    'CoolFactIntent': function () {
-        var factArr = this.t('FACTS');
-        var factIndex = Math.floor(Math.random() * factArr.length);
-        var randomFact = factArr[factIndex];
-        var speechOutput = 'Heres a fact about P S E G: ' + randomFact;
-        this.emit(':tellWithCard', speechOutput, this.t('P S E G Facts'), randomFact);
-    },
-    'AwardsIntent': function () {
-        var awardArr = this.t('AWARDS');
-        var awardIndex = Math.floor(Math.random() * awardArr.length);
-        var randomAward = awardArr[awardIndex];
-        var speechOutput = 'Heres an award P S E G has won: ' + randomAward;
-        this.emit(':tellWithCard', speechOutput, this.t('P S E G Awards'), randomAward);
-    },
-    'GetNewSavingTipIntent': function () {
-        const tipArr = this.t('TIPS');
-        const tipIndex = Math.floor(Math.random() * tipArr.length);
-        const randomTip = tipArr[tipIndex];
-        const speechOutput = 'Heres your savings tip: ' + randomTip;
-        this.emit(':tellWithCard', speechOutput, this.t('P S E G Tips'), randomTip);
-    },
-    'CafIntent': function () {
-        this.emit(':tell', 'The P S E G Cafeteria is located on the third floor, take the elevator to the second floor and use the escalator to go get some food.');
-    },
-    'FactsIntent': function() {
-        this.emit(':tell', 'P S E G, or Public Service Enterprise group, is the main energy distributor for New Jersey and Long Island. The company has been around since nineteen oh two and is one of the ten largest utility companies in the country. Wow, that is impressive!');
-    },
-    'ITInfoIntent': function(){
-        this.emit(':tell', 'The I T department at P S E G is made up of a number of different sub teams such as Network Operations, Security, A P O, I P O, See So, Quality Assurance, and others. They are responsible for large scale technology projects which ensure that customers have the best experience when using our applications and services.');
-    },
-    'BestTeamIntent': function(){
-        this.emit(':tell', 'The I T department is the best department at P S E G, that is where you can find all the best looking interns and employees.');
-    },
-    'IfYouWereRealIntent': function(){
-        this.emit(':tell', 'If I could have a job I would definitely work in the I T department at P S E G. They are the smartest, funniest, and best looking group of employees. I cant even see and I know that.');
-    },
-    'locationsIntent': function(){
-        this.emit(':tell','The main P S E G headquarters is in Newark New Jersey, however there are offices and power plants in other locations such as Edison, Salem, and Long Island.');
-    }, 
-    'ceoIntent': function(){
-        this.emit(':tell', 'Ralph Izzo is the C E O of P S E G, he has held this position for the last ten years.');
-    },
-    'cioIntent': function(){
-        this.emit(':tell', 'The C I O is currently Joseph Santamaria.');
-    },
-    'historyIntent': function(){
-        this.emit(':tell', 'P S E G began in nineteen oh three and currently serves almost four million customers in New Jersey with electricity and or gas services.');
-    },
-    
-    /*************** GROUP T15 ***************/
-    
-    // HELP QUESTIONS
-    'beforeYouDig': function() {
-        this.emit(':tell', 'Call ' + digPhone);
-    },
-    'gasLeak': function(){
-        this.emit(':tell', 'Call ' + urgentPhone + ' to report a gas leak. In the mean time, be sure to open a window and leave the building.');
-    },
-    'downedWire': function(){
-        this.emit(':tell', 'Call ' + urgentPhone + ' to report a downed wire. Be sure to stay away from fallen lines and anything or anyone that may have come in contact with them.');
-    },
-    'powerOutage': function(){
-        this.emit(':tell', 'Call ' + urgentPhone + ' to report a power outage.');
-    },
-    'HelpDeskIntent' : function(){
-        this.emit(':ask', 'The help desk is open twenty four seven. ' + MORE_HELP, UNKNOWN);
-    },
-    'CallEightIntent' : function(){
-        this.emit(':ask', 'The help desk is open for Premium Software issues Monday through Friday from 8:30 A M to 5 P M. ' + MORE_HELP, UNKNOWN);
-    },
-    'CallSevenIntent' : function(){
-        this.emit(':ask', 'The help desk is open for voice and Phone issues Monday through Friday from 7 A M to 5 P M. ' + MORE_HELP, UNKNOWN);
-    },
-    'numberIntent' : function(){
-        this.emit(':ask', 'The help desk phone number is ' + helpDeskPhone + MORE_HELP, UNKNOWN);
-    },
-    
-    // SAFETY
-    'SafetyIntent': function(){
-        var safetyType = this.event.request.intent.slots.safetyType.value;
-        switch(safetyType){
-            case 'electric':
-                ElectricSafety = new Tips(ElectricSafety, this, ElectricSafetyCopy);
-                break;
-            case 'gas':
-                GasSafety = new Tips(GasSafety, this, GasSafetyCopy);
-                break;
-            case 'driving':
-                SafeDriving = new Tips(SafeDriving, this, SafeDrivingCopy);
-                break;
-            case 'employee':
-                EmployeeSafety = new Tips(EmployeeSafety, this, EmployeeSafetyCopy);
-                break;
-            default:
-                this.emit(':tell', "I'm sorry, I do not know any safety tips on that subject.");
-        }
-    },
-    'MoreFactsIntent': function(){      // repopulates safety facts lists with original contents
-        GasSafety=GasSafetyCopy.slice();
-        ElectricSafety=ElectricSafetyCopy.slice();
-        SafeDriving=SafeDrivingCopy.slice();
-        EmployeeSafety=EmployeeSafety.slice();
-        this.emit(':tell', "Would you like to hear Gas Safety Information, Electric Safety Information, Driving Safety Information, or Employee Safety Information?");
-    },
-    'NoMoreFactsIntent': function(){    // leaves safety facts lists unpopulated
-        this.emit(':tell', "Ok. ");
-    },
-    
-    /*************** GROUP T17 ***************/
-    
-    // NUCLEAR
-    'WhatIsNuclear': function () {
-        this.emit(':tell', 'P S E G Nuclear L L C operates the Salem and Hope Creek Nuclear Generating Stations.  They are located together on one site in Salem County New Jersey.');
-    },
-    'SalemSpecs': function () {
-        this.emit(':tell', 'Salem consists of dual unit pressured water reactors with a total generating capacity of two thousand two hundred and ninety six megawatts.  That is enough to generate enough electricity to power approximately two million homes per day.');
-    },
-    'SalemAge' : function () {
-        this.emit(':tell', 'The construction of Salem began in nineteen sixty eight.  The first unit began commercial service in nineteen seventy seven while the second unit began commercial service in nineteen eighty one.');
-    },
-    'HopeCreekSpecs': function () {
-        this.emit(':tell', 'Hope Creek consists of a single unit boiling water reactor with a total generating capacity of one thousand one hundred and seventy two megawatts.  That is enough to generate enough electricity to power approximately one million homes per day.');
-    },
-    'HopeCreekAge' : function () {
-        this.emit(':tell', 'The construction of Hope creek began in nineteen seventy four.  Commercial service then began in nineteen eighty six.');
-    },
-    'NeedNuclear': function () {
-     this.emit(':tell', 'Nuclear Power Plants in New Jersey produce reliable and clean energy that powers homes and businesses throughout the state. Using nuclear energy means cleaner air, lower electric bills, and economic growth. ');
-    },
-    'CleanNuclear': function () {
-         this.emit(':tell', 'Nuclear energy provides more than ninety percent of New Jerseys pollution-free energy. If nuclear were to be replaced with fossil fuels, fourteen million tons of pollution would be added to the air. This is equivalent to adding 3 million more cars on the roads.');
-    },
-    'ReliNuclear': function () {
-         this.emit(':tell', 'Nuclear energy makes up forty seven percent of electricity in New Jersey, powers two point seven million homes, and runs around the clock. Relying on fossil fuels would cause New Jersey to use more electricity than it produces, not to mention the fluctuation on cost if fossil fuel supplies are disrupted.');
-    },
-    
+
     // ACRONYMS
     'acronymHelper': function () {
         var acronym = this.event.request.intent.slots.AcronymName.value;

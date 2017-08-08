@@ -2,16 +2,14 @@
 
 var Alexa = require('alexa-sdk');
 var https = require('https');
-var myRequest = '';
 const APP_ID = 'amzn1.ask.skill.1e041c80-9217-4ddb-b923-295e425d4ea8';
+var myRequest = '';
 
 var START_MESSAGE = 'Welcome to the P S E G Company Guide. Ask me anything you would like to know about the company.';
 var HELP_MESSAGE = 'Ask me anythig you would like to know about P S E G.';
 var STOP_MESSAGE = 'Goodbye. ';
 var UNKNOWN = 'I did not understand that. ';
-
-var helpCont= 'If you want to continue I can tell you hours for P C issues, voice issues, software issues, login issues, or other issues. ';
-var moreHelp = 'You may ask again if you need more help. ';
+var MORE_HELP = 'You may ask again if you need more help. ';
 
 var digPhone = '1 8 hundred, 2 7 2, 1 0 0 0.';
 var urgentPhone = '1 8 hundred, 8 8 0, 7 7 3 4.';
@@ -211,7 +209,7 @@ var handlers = {
     },
     
     'FoodRandomIntent' : function () {
-        var rand = Math.floor(Math.random() * 9); //multiply math.random() with however many switch cases you have
+        var rand = Math.floor(Math.random() * 9);
         switch(rand) {
         case 0:
             this.emit(':tell', 'Right across the street from P S E G is hannas deli.  Great for breakfast or lunch.');
@@ -322,57 +320,47 @@ var handlers = {
         this.emit(':tell', 'Call ' + urgentPhone + ' to report a power outage.');
     },
     'HelpDeskIntent' : function(){
-        this.emit(':ask', 'The help desk is open twenty four seven. ' + moreHelp, helpCont);
+        this.emit(':ask', 'The help desk is open twenty four seven. You can reach it at ' + helpDeskPhone + MORE_HELP, UNKNOWN);
     },
     'CallEightIntent' : function(){
-        this.emit(':ask', 'The help desk is open for Premium Software issues Monday through Friday from 8:30 A M to 5 P M. ' + moreHelp, helpCont);
+        this.emit(':ask', 'The help desk is open for Premium Software issues Monday through Friday from 8:30 A M to 5 P M. ' + MORE_HELP, UNKNOWN);
     },
     'CallSevenIntent' : function(){
-        this.emit(':ask', 'The help desk is open for voice and Phone issues Monday through Friday from 7 A M to 5 P M. ' + moreHelp, helpCont);
+        this.emit(':ask', 'The help desk is open for voice and Phone issues Monday through Friday from 7 A M to 5 P M. ' + MORE_HELP, UNKNOWN);
     },
     'numberIntent' : function(){
-        this.emit(':ask', 'The help desk phone number is ' + helpDeskPhone + moreHelp, helpCont);
-    },
-    'Unhandled': function() {
-    this.emit(':ask', UNKNOWN, UNKNOWN);
+        this.emit(':ask', 'The help desk phone number is ' + helpDeskPhone + MORE_HELP, UNKNOWN);
     },
     
     // SAFETY
     'SafetyIntent': function(){
-        /* generalized intent that will use the function to go through the list
-        and choose a random fact to be stated and removed from the list */
-        var b=this;
-        var safetyType=b.event.request.intent.slots.safetyType.value;
-        
+        var safetyType = this.event.request.intent.slots.safetyType.value;
         switch(safetyType){
             case 'electric':
-                ElectricSafety = new Tips(ElectricSafety, b, ElectricSafetyCopy);
+                ElectricSafety = new Tips(ElectricSafety, this, ElectricSafetyCopy);
                 break;
             case 'gas':
-                GasSafety = new Tips(GasSafety, b, GasSafetyCopy);
+                GasSafety = new Tips(GasSafety, this, GasSafetyCopy);
                 break;
             case 'driving':
-                SafeDriving = new Tips(SafeDriving, b, SafeDrivingCopy);
+                SafeDriving = new Tips(SafeDriving, this, SafeDrivingCopy);
                 break;
             case 'employee':
-                EmployeeSafety = new Tips(EmployeeSafety, b, EmployeeSafetyCopy);
+                EmployeeSafety = new Tips(EmployeeSafety, this, EmployeeSafetyCopy);
                 break;
             default:
-                b.emit(':tell', "I'm sorry, I do not know any safety tips on that subject.");
+                this.emit(':tell', "I'm sorry, I do not know any safety tips on that subject.");
         }
     },
-    'MoreFactsIntent': function(){
-        /* this intent repopulates every list with the original contents after the user requests
-        more facts to be said and then asks the user again what facts they would like to hear */
+    'MoreFactsIntent': function(){      // repopulates safety facts lists with original contents
         GasSafety=GasSafetyCopy.slice();
         ElectricSafety=ElectricSafetyCopy.slice();
         SafeDriving=SafeDrivingCopy.slice();
         EmployeeSafety=EmployeeSafety.slice();
         this.emit(':tell', "Would you like to hear Gas Safety Information, Electric Safety Information, Driving Safety Information, or Employee Safety Information?");
     },
-    'NoMoreFactsIntent': function(){
-        /* this intent leaves the safety facts lists unpopulated */
-        this.emit(':tell', "Ok.");
+    'NoMoreFactsIntent': function(){    // leaves safety facts lists unpopulated
+        this.emit(':tell', "Ok. ");
     },
     
     /*************** GROUP T17 ***************/
@@ -674,7 +662,7 @@ var handlers = {
                 break;
         }
         
-      this.emit(':tell', say);  
+      this.emit(':ask', say + MORE_HELP, UNKNOWN);  
     }
 
 };

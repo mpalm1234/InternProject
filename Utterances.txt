@@ -146,8 +146,3 @@ CoolFactIntent For a random fact about P S E G
 CoolFactIntent To say something cool about P S E G
 AwardsIntent To tell me some awards P S E G has won
 AwardsIntent What awards has P S E G won
-BestTeamIntent Who the best department at P S E G is
-BestTeamIntent Where can I find all the best looking interns
-BestTeamIntent What department do you think is the best at P S E G
-IfYouWereRealIntent If you had a job where would you work
-IfYouWereRealIntent If you could work anywhere where would it be

@@ -6,7 +6,7 @@ const APP_ID = 'amzn1.ask.skill.1e041c80-9217-4ddb-b923-295e425d4ea8';
 var myRequest = '';
 
 var START_MESSAGE = 'Welcome to the P S E G Company Guide. Ask me anything you would like to know about the company.';
-var HELP_MESSAGE = 'Ask me anythig you would like to know about P S E G.';
+var HELP_MESSAGE = 'Ask me anythig you would like to know about P S E G. ';
 var STOP_MESSAGE = 'Goodbye. ';
 var UNKNOWN = 'I did not understand that. ';
 var MORE_HELP = 'You may ask again if you need more help. ';
@@ -112,7 +112,7 @@ const languageStrings = {
 
 function Tips(TipsList, y, TipsListCopy){
     if(TipsList.length===0) {
-        y.emit(':ask', 'I have already told you all of my safety tips for this, would you like to hear them again? Answer MORE FACTS PLEASE! or NO MORE FACTS.', UNKNOWN + 'can you repeat?');
+        y.emit(':ask', 'I have already told you all of my safety tips for this, would you like to hear them again? Answer MORE FACTS PLEASE! or NO MORE FACTS.', UNKNOWN + 'Can you repeat? ');
     }
     var x = Math.floor(Math.random()*TipsList.length);  //chooses a random number that will be used to choose a random index in the list
     y.emit(':tell', TipsList[x]);
@@ -141,7 +141,6 @@ function httpsGet(myData, callback) {
             var parsePrice = stringData.substring(79,84);
             var parseTime = stringData.substring(162,169);
             var retArr = [parsePrice, parseTime];
-            //callback(price);
             callback(retArr);
         });
     });
@@ -154,11 +153,9 @@ exports.handler = function (event, context, callback) {
     alexa.resources = languageStrings;
     alexa.registerHandlers(handlers);
     alexa.execute();
-    //callback(null, 'Hello from Lambda.');
 };
 
 var handlers = {
-    
     'LaunchRequest': function () {
         this.emit(':tell', START_MESSAGE);
     },
@@ -204,7 +201,7 @@ var handlers = {
             this.emit(':tell', 'Check out dinosaur barbecue on 224 market street, right next to the prudential center.');
             break;
         default: 
-            this.emit(':tell', 'Sorry, I dont know where to find that.'); 
+            this.emit(':tell', 'Sorry, I dont know where to find that around here. '); 
         }
     },
     
@@ -245,7 +242,7 @@ var handlers = {
     
     // STOCKS
     'stockIntent': function () {
-        httpsGet(myRequest,  (myResult) => {            // ignore myRequest, it was part of the cookbook example
+        httpsGet(myRequest,  (myResult) => {
             console.log("sent     : " + myRequest);
             console.log("received : " + myResult);
             
@@ -320,7 +317,7 @@ var handlers = {
         this.emit(':tell', 'Call ' + urgentPhone + ' to report a power outage.');
     },
     'HelpDeskIntent' : function(){
-        this.emit(':ask', 'The help desk is open twenty four seven. You can reach it at ' + helpDeskPhone + MORE_HELP, UNKNOWN);
+        this.emit(':ask', 'The help desk is open twenty four seven. ' + MORE_HELP, UNKNOWN);
     },
     'CallEightIntent' : function(){
         this.emit(':ask', 'The help desk is open for Premium Software issues Monday through Friday from 8:30 A M to 5 P M. ' + MORE_HELP, UNKNOWN);
@@ -661,8 +658,6 @@ var handlers = {
                 say = 'X I stands for Exchange Infrastructure.';
                 break;
         }
-        
       this.emit(':ask', say + MORE_HELP, UNKNOWN);  
     }
-
 };

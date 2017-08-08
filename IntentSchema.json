@@ -155,12 +155,6 @@
     },
     {
       "intent": "AwardsIntent"
-    },
-    {
-      "intent": "BestTeamIntent"
-    },
-    {
-      "intent": "IfYouWereRealIntent"
     }
   ]
 }

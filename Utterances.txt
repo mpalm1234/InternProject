@@ -120,8 +120,6 @@ MoreFactsIntent For more Facts
 NoMoreFactsIntent For no More Facts
 NoMoreFactsIntent For no More Facts Please
 SafetyIntent To tell me about {safetyType} Safety
-SafetyIntent To give me advice about staying safe
-SafetyIntent Can you give me advice about staying safe
 SafetyIntent To give me a fact about {safetyType} safety
 SafetyIntent For a {safetyType} safety fact
 SafetyIntent To give me a {safetyType} safety fact
